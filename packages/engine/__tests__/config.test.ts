@@ -13,10 +13,10 @@ describe("Config", () => {
     resetConfig();
   });
 
-  it("should return default port and cors", () => {
+  it("should return default port and data dir", () => {
     const config = getConfig();
     expect(config.port).toBe(3001);
-    expect(config.corsOrigins).toContain("http://localhost:3000");
+    expect(config.dataDir).toBe("data/sources");
   });
 
   it("should read NODE_ENV from environment", () => {

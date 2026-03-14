@@ -3,6 +3,7 @@
 
 import helmet from "helmet";
 import { getConfig } from "../../../packages/engine/config/config";
+// Note: securityHeaders only needs `env` from AppConfig (not security-specific config)
 
 /**
  * Security headers middleware powered by helmet.
