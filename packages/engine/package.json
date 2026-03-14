@@ -1,0 +1,9 @@
+{
+  "name": "@hodiopolitica/engine",
+  "version": "1.0.0",
+  "private": true,
+  "license": "BUSL-1.1",
+  "main": "index.ts",
+  "types": "index.ts",
+  "description": "Core policy analysis engine with domain models and evaluation functions"
+}

@@ -1,0 +1,267 @@
+openapi: 3.1.0
+info:
+  title: HodioPolitica API
+  version: 1.0.0
+  description: Motor de evaluación de políticas públicas contra indicadores económicos
+  license:
+    name: BUSL-1.1
+    url: https://mariadb.com/bsl11/
+  contact:
+    name: Clarity Structures Digital S.L.
+    url: https://github.com/Neiland85/hodiopolitica
+
+servers:
+  - url: http://localhost:3001
+    description: Development
+
+paths:
+  /api/health:
+    get:
+      summary: Health check
+      operationId: getHealth
+      tags: [System]
+      responses:
+        '200':
+          description: Service healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+        '503':
+          description: Service degraded
+
+  /api/countries:
+    get:
+      summary: List available countries
+      operationId: listCountries
+      tags: [Countries]
+      responses:
+        '200':
+          description: Available countries
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountriesResponse'
+
+  /api/policy/evaluate:
+    get:
+      summary: Evaluate default housing policy for a country
+      operationId: evaluatePolicyGet
+      tags: [Policy]
+      parameters:
+        - name: country
+          in: query
+          schema:
+            type: string
+            default: spain
+      responses:
+        '200':
+          description: Evaluation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluatePolicyResponse'
+        '404':
+          description: Country not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      summary: Evaluate a custom policy
+      operationId: evaluatePolicyPost
+      tags: [Policy]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvaluatePolicyRequest'
+      responses:
+        '200':
+          description: Evaluation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluatePolicyResponse'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/policy/compare:
+    post:
+      summary: Compare policy across multiple countries
+      operationId: compareCountries
+      tags: [Policy]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompareCountriesRequest'
+      responses:
+        '200':
+          description: Comparison result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompareCountriesResponse'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    PolicyDomain:
+      type: string
+      enum: [housing, education, healthcare, economy, environment]
+
+    SeverityLevel:
+      type: string
+      enum: [low, moderate, high, critical]
+
+    PolicyInput:
+      type: object
+      required: [id, title, domain]
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        domain:
+          $ref: '#/components/schemas/PolicyDomain'
+        actors:
+          type: array
+          items: { type: string }
+        objectives:
+          type: array
+          items: { type: string }
+
+    PolicyMetricDTO:
+      type: object
+      properties:
+        policyId: { type: string }
+        metricName: { type: string }
+        value: { type: number }
+        source: { type: string }
+        description: { type: string }
+        severity:
+          $ref: '#/components/schemas/SeverityLevel'
+
+    EvaluatePolicyRequest:
+      type: object
+      required: [policy, country]
+      properties:
+        policy:
+          $ref: '#/components/schemas/PolicyInput'
+        country:
+          type: string
+
+    EvaluatePolicyResponse:
+      type: object
+      properties:
+        policy:
+          type: object
+          properties:
+            id: { type: string }
+            title: { type: string }
+            domain: { type: string }
+        context:
+          type: object
+          properties:
+            country: { type: string }
+            year: { type: integer }
+            sources:
+              type: array
+              items: { type: string }
+        metrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyMetricDTO'
+        durationMs: { type: number }
+        evaluatedAt: { type: string, format: date-time }
+
+    CompareCountriesRequest:
+      type: object
+      required: [policy, countries]
+      properties:
+        policy:
+          $ref: '#/components/schemas/PolicyInput'
+        countries:
+          type: array
+          items: { type: string }
+          minItems: 2
+          maxItems: 10
+
+    CompareCountriesResponse:
+      type: object
+      properties:
+        policy:
+          type: object
+          properties:
+            id: { type: string }
+            title: { type: string }
+            domain: { type: string }
+        comparisons:
+          type: array
+          items:
+            $ref: '#/components/schemas/CountryComparisonDTO'
+        summary:
+          type: object
+          properties:
+            bestPerforming: { type: string }
+            worstPerforming: { type: string }
+            countriesAnalyzed: { type: integer }
+            highestVarianceMetric: { type: string }
+        evaluatedAt: { type: string, format: date-time }
+
+    CountryComparisonDTO:
+      type: object
+      properties:
+        country: { type: string }
+        year: { type: integer }
+        sources:
+          type: array
+          items: { type: string }
+        metrics:
+          type: array
+          items:
+            type: object
+            properties:
+              metricName: { type: string }
+              value: { type: number }
+              severity:
+                $ref: '#/components/schemas/SeverityLevel'
+              description: { type: string }
+
+    HealthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [ok, degraded, error]
+        timestamp: { type: string, format: date-time }
+        version: { type: string }
+
+    CountriesResponse:
+      type: object
+      properties:
+        countries:
+          type: array
+          items: { type: string }
+
+    ErrorResponse:
+      type: object
+      properties:
+        error: { type: string }
+        code: { type: string }
+        message: { type: string }
+        timestamp: { type: string, format: date-time }

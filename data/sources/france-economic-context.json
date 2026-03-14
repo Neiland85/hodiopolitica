@@ -1,0 +1,15 @@
+{
+  "country": "France",
+  "year": 2023,
+  "indicators": {
+    "inflation": 4.9,
+    "unemployment": 7.1,
+    "housing_price_index": 132.5,
+    "gdp_growth": 0.9
+  },
+  "sources": [
+    "INSEE",
+    "Eurostat",
+    "Banque de France"
+  ]
+}

@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hodiopolitica-api
+    ports:
+      - '3001:3001'
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - LOG_LEVEL=info
+      - CORS_ORIGINS=http://localhost:3000
+      - RATE_LIMIT_MAX=100
+      - RATE_LIMIT_WINDOW_MS=900000
+      - BODY_MAX_SIZE=10kb
+      - TRUST_PROXY=true
+    volumes:
+      - ./data/sources:/app/data/sources:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD', 'wget', '-qO-', 'http://localhost:3001/api/health']
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    container_name: hodiopolitica-web
+    ports:
+      - '3000:3000'
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:3001
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
