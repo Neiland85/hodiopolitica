@@ -3,7 +3,6 @@
 
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
 import type {
   CompareCountriesResponse,
   CountriesResponse,
@@ -11,7 +10,8 @@ import type {
   EvaluatePolicyResponse,
   PolicyMetricDTO,
   SeverityLevel,
-} from "../../../packages/contracts/src/index";
+} from "@hodiopolitica/contracts";
+import { useCallback, useEffect, useState } from "react";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
@@ -31,7 +31,10 @@ const SEVERITY_LABELS: Record<string, string> = {
 
 const DOMAIN_OPTIONS = [
   { value: "housing", label: "Vivienda" },
-  { value: "education", label: "Educaci\u00f3n" },
+  { value: "education", label: "Educación" },
+  { value: "healthcare", label: "Sanidad" },
+  { value: "economy", label: "Economía" },
+  { value: "environment", label: "Medio Ambiente" },
 ];
 
 type ViewMode = "single" | "compare";

@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: BUSL-1.1
 // Copyright (c) 2026 Clarity Structures Digital S.L.
 
-import { evaluatePolicy } from './packages/engine/analysis/policy-engine'
-import { loadEconomicContext } from './packages/engine/datasets/load-economic-context'
-import type { PolicyDecision } from './packages/engine/policy/policy-decision'
+import { evaluatePolicy } from "@hodiopolitica/engine/analysis/policy-engine";
+import { loadEconomicContext } from "@hodiopolitica/engine/datasets/load-economic-context";
+import type { PolicyDecision } from "@hodiopolitica/engine/policy/policy-decision";
 
 /**
  * CLI entry point: runs a policy evaluation and prints results.

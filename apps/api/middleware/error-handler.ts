@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: BUSL-1.1
 // Copyright (c) 2026 Clarity Structures Digital S.L.
 
+import type { ErrorResponse } from "@hodiopolitica/contracts";
+import { createLogger } from "@hodiopolitica/engine/shared/logger/logger";
 import type { NextFunction, Request, Response } from "express";
-import type { ErrorResponse } from "../../../packages/contracts/src/index";
-import { createLogger } from "../../../packages/engine/shared/logger/logger";
 
 const logger = createLogger("api.error-handler");
 

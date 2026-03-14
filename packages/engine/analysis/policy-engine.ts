@@ -3,7 +3,10 @@
 
 import type { PolicyContext } from "../context/policy-context";
 import type { PolicyMetric } from "../metrics/policy-metric";
+import { evaluateEconomyPolicy } from "../models/economy-policy-model";
 import { evaluateEducationPolicy } from "../models/education-policy-model";
+import { evaluateEnvironmentPolicy } from "../models/environment-policy-model";
+import { evaluateHealthcarePolicy } from "../models/healthcare-policy-model";
 import { evaluateHousingPolicy } from "../models/housing-policy-model";
 import type { PolicyDecision } from "../policy/policy-decision";
 
@@ -24,10 +27,9 @@ export type PolicyEvaluator = (decision: PolicyDecision, context: PolicyContext)
 const evaluators: Record<string, PolicyEvaluator> = {
   housing: evaluateHousingPolicy,
   education: evaluateEducationPolicy,
-  // Future domains:
-  // healthcare: evaluateHealthcarePolicy,
-  // economy: evaluateEconomyPolicy,
-  // environment: evaluateEnvironmentPolicy,
+  healthcare: evaluateHealthcarePolicy,
+  economy: evaluateEconomyPolicy,
+  environment: evaluateEnvironmentPolicy,
 };
 
 export function evaluatePolicy(decision: PolicyDecision, context: PolicyContext): PolicyMetric[] {

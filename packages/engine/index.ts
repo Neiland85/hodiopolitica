@@ -34,7 +34,10 @@ export type { EconomicIndicators, PolicyContext } from "./context/policy-context
 export { loadEconomicContext } from "./datasets/load-economic-context";
 export type { MetricSeverity, MetricThresholds, PolicyMetric } from "./metrics/policy-metric";
 export { classifyMetricSeverity } from "./metrics/policy-metric";
+export { evaluateEconomyPolicy } from "./models/economy-policy-model";
 export { evaluateEducationPolicy } from "./models/education-policy-model";
+export { evaluateEnvironmentPolicy } from "./models/environment-policy-model";
+export { evaluateHealthcarePolicy } from "./models/healthcare-policy-model";
 export { evaluateHousingPolicy } from "./models/housing-policy-model";
 // ─── Domain Entities ────────────────────────────────────────
 export type { PolicyDecision, PolicyDomain } from "./policy/policy-decision";

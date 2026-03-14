@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: BUSL-1.1
 // Copyright (c) 2026 Clarity Structures Digital S.L.
 
-import type { Request, Response } from "express";
-import express from "express";
 import type {
   CompareCountriesRequest,
   CompareCountriesResponse,
@@ -11,15 +9,17 @@ import type {
   EvaluatePolicyRequest,
   EvaluatePolicyResponse,
   HealthResponse,
-} from "../../../packages/contracts/src/index";
-import type { CompareCountriesUseCase } from "../../../packages/engine/application/compare-countries.usecase";
-import type { EvaluatePolicyUseCase } from "../../../packages/engine/application/evaluate-policy.usecase";
-import type { ListCountriesUseCase } from "../../../packages/engine/application/list-countries.usecase";
-import { getConfig } from "../../../packages/engine/config/config";
-import type { PolicyDecision, PolicyDomain } from "../../../packages/engine/policy/policy-decision";
-import type { EconomicContextRepository } from "../../../packages/engine/repositories/economic-context-repository";
-import { bootstrapContainer, DI } from "../../../packages/engine/shared/container/composition-root";
-import { createLogger } from "../../../packages/engine/shared/logger/logger";
+} from "@hodiopolitica/contracts";
+import type { CompareCountriesUseCase } from "@hodiopolitica/engine/application/compare-countries.usecase";
+import type { EvaluatePolicyUseCase } from "@hodiopolitica/engine/application/evaluate-policy.usecase";
+import type { ListCountriesUseCase } from "@hodiopolitica/engine/application/list-countries.usecase";
+import { getConfig } from "@hodiopolitica/engine/config/config";
+import type { PolicyDecision, PolicyDomain } from "@hodiopolitica/engine/policy/policy-decision";
+import type { EconomicContextRepository } from "@hodiopolitica/engine/repositories/economic-context-repository";
+import { bootstrapContainer, DI } from "@hodiopolitica/engine/shared/container/composition-root";
+import { createLogger } from "@hodiopolitica/engine/shared/logger/logger";
+import type { Request, Response } from "express";
+import express from "express";
 import { getSecurityConfig } from "../config/security-config";
 import { auditLogger } from "../middleware/audit-logger";
 import { corsMiddleware } from "../middleware/cors";
