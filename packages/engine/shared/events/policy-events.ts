@@ -1,5 +1,5 @@
-import type { PolicyDomain } from '../../policy/policy-decision'
-import type { MetricSeverity } from '../../metrics/policy-metric'
+import type { MetricSeverity } from "../../metrics/policy-metric";
+import type { PolicyDomain } from "../../policy/policy-decision";
 
 /**
  * Concrete domain event payloads for the Policy bounded context.
@@ -9,33 +9,33 @@ import type { MetricSeverity } from '../../metrics/policy-metric'
 
 /** Emitted when a policy is successfully evaluated. */
 export interface PolicyEvaluatedPayload {
-  policyId: string
-  domain: PolicyDomain
-  country: string
-  year: number
-  metricsCount: number
+  policyId: string;
+  domain: PolicyDomain;
+  country: string;
+  year: number;
+  metricsCount: number;
   metrics: Array<{
-    name: string
-    value: number
-    severity: MetricSeverity
-  }>
-  durationMs: number
+    name: string;
+    value: number;
+    severity: MetricSeverity;
+  }>;
+  durationMs: number;
 }
 
 /** Emitted when a policy evaluation fails. */
 export interface PolicyEvaluationFailedPayload {
-  policyId: string
-  domain: PolicyDomain
-  errorCode: string
-  errorMessage: string
+  policyId: string;
+  domain: PolicyDomain;
+  errorCode: string;
+  errorMessage: string;
 }
 
 /** Emitted when economic context is loaded from a data source. */
 export interface EconomicContextLoadedPayload {
-  country: string
-  year: number
-  source: string
-  indicatorCount: number
+  country: string;
+  year: number;
+  source: string;
+  indicatorCount: number;
 }
 
 /**
@@ -43,9 +43,9 @@ export interface EconomicContextLoadedPayload {
  * Using const enum for zero-cost abstraction at runtime.
  */
 export const PolicyEventTypes = {
-  PolicyEvaluated: 'PolicyEvaluated',
-  PolicyEvaluationFailed: 'PolicyEvaluationFailed',
-  EconomicContextLoaded: 'EconomicContextLoaded',
-} as const
+  PolicyEvaluated: "PolicyEvaluated",
+  PolicyEvaluationFailed: "PolicyEvaluationFailed",
+  EconomicContextLoaded: "EconomicContextLoaded",
+} as const;
 
-export type PolicyEventType = (typeof PolicyEventTypes)[keyof typeof PolicyEventTypes]
+export type PolicyEventType = (typeof PolicyEventTypes)[keyof typeof PolicyEventTypes];

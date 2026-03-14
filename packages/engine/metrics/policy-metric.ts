@@ -4,37 +4,37 @@
  */
 export interface PolicyMetric {
   /** Reference to the evaluated policy */
-  policyId: string
+  policyId: string;
   /** Name of the metric (e.g. "housing_pressure", "social_stress") */
-  metricName: string
+  metricName: string;
   /** Computed numeric value */
-  value: number
+  value: number;
   /** Evaluation model that produced this metric */
-  source: string
+  source: string;
   /** When the evaluation was performed */
-  timestamp: Date
+  timestamp: Date;
   /** Human-readable explanation of what this metric means */
-  description: string
+  description: string;
 }
 
 /**
  * Severity levels for metric interpretation.
  */
-export type MetricSeverity = 'low' | 'moderate' | 'high' | 'critical'
+export type MetricSeverity = "low" | "moderate" | "high" | "critical";
 
 /**
  * Classifies a metric value into a severity level.
  * Thresholds are domain-specific and should be calibrated.
  */
 export function classifyMetricSeverity(value: number, thresholds: MetricThresholds): MetricSeverity {
-  if (value >= thresholds.critical) return 'critical'
-  if (value >= thresholds.high) return 'high'
-  if (value >= thresholds.moderate) return 'moderate'
-  return 'low'
+  if (value >= thresholds.critical) return "critical";
+  if (value >= thresholds.high) return "high";
+  if (value >= thresholds.moderate) return "moderate";
+  return "low";
 }
 
 export interface MetricThresholds {
-  moderate: number
-  high: number
-  critical: number
+  moderate: number;
+  high: number;
+  critical: number;
 }

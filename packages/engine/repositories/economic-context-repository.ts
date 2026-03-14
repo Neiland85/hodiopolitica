@@ -1,6 +1,6 @@
-import type { PolicyContext } from '../context/policy-context'
-import type { Result } from '../shared/result/result'
-import type { DomainError } from '../shared/errors/domain-error'
+import type { PolicyContext } from "../context/policy-context";
+import type { DomainError } from "../shared/errors/domain-error";
+import type { Result } from "../shared/result/result";
 
 /**
  * Repository interface for economic context data.
@@ -18,10 +18,10 @@ export interface EconomicContextRepository {
    * Loads the economic context for a given country.
    * @param country - ISO country identifier or name
    */
-  findByCountry(country: string): Result<PolicyContext, DomainError>
+  findByCountry(country: string): Result<PolicyContext, DomainError>;
 
   /**
    * Lists all available countries in the data source.
    */
-  listAvailableCountries(): Result<string[], DomainError>
+  listAvailableCountries(): Result<string[], DomainError>;
 }

@@ -1,9 +1,9 @@
-import { Container, createContainer } from './container'
-import { FileEconomicContextRepository } from '../../repositories/file-economic-context-repository'
-import { EvaluatePolicyUseCase } from '../../application/evaluate-policy.usecase'
-import { ListCountriesUseCase } from '../../application/list-countries.usecase'
-import { CompareCountriesUseCase } from '../../application/compare-countries.usecase'
-import type { EconomicContextRepository } from '../../repositories/economic-context-repository'
+import { CompareCountriesUseCase } from "../../application/compare-countries.usecase";
+import { EvaluatePolicyUseCase } from "../../application/evaluate-policy.usecase";
+import { ListCountriesUseCase } from "../../application/list-countries.usecase";
+import type { EconomicContextRepository } from "../../repositories/economic-context-repository";
+import { FileEconomicContextRepository } from "../../repositories/file-economic-context-repository";
+import { type Container, createContainer } from "./container";
 
 /**
  * Composition Root — the single place where all dependencies are wired.
@@ -19,41 +19,38 @@ import type { EconomicContextRepository } from '../../repositories/economic-cont
 
 /** Dependency names — typed keys for the container. */
 export const DI = {
-  ContextRepo: 'contextRepo',
-  EvaluatePolicy: 'evaluatePolicy',
-  ListCountries: 'listCountries',
-  CompareCountries: 'compareCountries',
-} as const
+  ContextRepo: "contextRepo",
+  EvaluatePolicy: "evaluatePolicy",
+  ListCountries: "listCountries",
+  CompareCountries: "compareCountries",
+} as const;
 
-export type DIKey = (typeof DI)[keyof typeof DI]
+export type DIKey = (typeof DI)[keyof typeof DI];
 
 /**
  * Bootstraps the DI container with all production dependencies.
  */
 export function bootstrapContainer(dataDir?: string): Container {
-  const container = createContainer()
+  const container = createContainer();
 
   // Infrastructure
-  container.register<EconomicContextRepository>(
-    DI.ContextRepo,
-    () => new FileEconomicContextRepository(dataDir),
-  )
+  container.register<EconomicContextRepository>(DI.ContextRepo, () => new FileEconomicContextRepository(dataDir));
 
   // Use Cases
   container.register<EvaluatePolicyUseCase>(
     DI.EvaluatePolicy,
     (c) => new EvaluatePolicyUseCase(c.resolve(DI.ContextRepo)),
-  )
+  );
 
   container.register<ListCountriesUseCase>(
     DI.ListCountries,
     (c) => new ListCountriesUseCase(c.resolve(DI.ContextRepo)),
-  )
+  );
 
   container.register<CompareCountriesUseCase>(
     DI.CompareCountries,
     (c) => new CompareCountriesUseCase(c.resolve(DI.ContextRepo)),
-  )
+  );
 
-  return container
+  return container;
 }

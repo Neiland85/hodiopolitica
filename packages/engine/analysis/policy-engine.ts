@@ -1,8 +1,8 @@
-import type { PolicyDecision } from '../policy/policy-decision'
-import type { PolicyContext } from '../context/policy-context'
-import type { PolicyMetric } from '../metrics/policy-metric'
-import { evaluateHousingPolicy } from '../models/housing-policy-model'
-import { evaluateEducationPolicy } from '../models/education-policy-model'
+import type { PolicyContext } from "../context/policy-context";
+import type { PolicyMetric } from "../metrics/policy-metric";
+import { evaluateEducationPolicy } from "../models/education-policy-model";
+import { evaluateHousingPolicy } from "../models/housing-policy-model";
+import type { PolicyDecision } from "../policy/policy-decision";
 
 /**
  * Central policy evaluation engine.
@@ -16,7 +16,7 @@ import { evaluateEducationPolicy } from '../models/education-policy-model'
  *   2. Registering it in the `evaluators` map below
  */
 
-export type PolicyEvaluator = (decision: PolicyDecision, context: PolicyContext) => PolicyMetric[]
+export type PolicyEvaluator = (decision: PolicyDecision, context: PolicyContext) => PolicyMetric[];
 
 const evaluators: Record<string, PolicyEvaluator> = {
   housing: evaluateHousingPolicy,
@@ -25,27 +25,24 @@ const evaluators: Record<string, PolicyEvaluator> = {
   // healthcare: evaluateHealthcarePolicy,
   // economy: evaluateEconomyPolicy,
   // environment: evaluateEnvironmentPolicy,
-}
+};
 
-export function evaluatePolicy(
-  decision: PolicyDecision,
-  context: PolicyContext,
-): PolicyMetric[] {
-  const evaluator = evaluators[decision.domain]
+export function evaluatePolicy(decision: PolicyDecision, context: PolicyContext): PolicyMetric[] {
+  const evaluator = evaluators[decision.domain];
 
   if (evaluator) {
-    return evaluator(decision, context)
+    return evaluator(decision, context);
   }
 
   // Fallback: return a placeholder metric for unsupported domains
   return [
     {
       policyId: decision.id,
-      metricName: 'generic_policy_analysis',
+      metricName: "generic_policy_analysis",
       value: 0,
-      source: 'policy-engine',
+      source: "policy-engine",
       timestamp: new Date(),
       description: `No specialized model available for domain "${decision.domain}". Register an evaluator in policy-engine.ts.`,
     },
-  ]
+  ];
 }

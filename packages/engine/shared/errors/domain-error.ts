@@ -6,15 +6,15 @@
  * handled explicitly via the Result type.
  */
 export abstract class DomainError {
-  abstract readonly code: string
-  abstract readonly message: string
+  abstract readonly code: string;
+  abstract readonly message: string;
 
   toString(): string {
-    return `[${this.code}] ${this.message}`
+    return `[${this.code}] ${this.message}`;
   }
 
   toJSON(): { code: string; message: string } {
-    return { code: this.code, message: this.message }
+    return { code: this.code, message: this.message };
   }
 }
 
@@ -22,12 +22,12 @@ export abstract class DomainError {
  * A required economic indicator is missing or invalid.
  */
 export class InvalidIndicatorError extends DomainError {
-  readonly code = 'INVALID_INDICATOR'
-  readonly message: string
+  readonly code = "INVALID_INDICATOR";
+  readonly message: string;
 
   constructor(indicatorName: string, reason: string) {
-    super()
-    this.message = `Indicator "${indicatorName}" is invalid: ${reason}`
+    super();
+    this.message = `Indicator "${indicatorName}" is invalid: ${reason}`;
   }
 }
 
@@ -35,12 +35,12 @@ export class InvalidIndicatorError extends DomainError {
  * The policy domain is not supported by any registered evaluator.
  */
 export class UnsupportedDomainError extends DomainError {
-  readonly code = 'UNSUPPORTED_DOMAIN'
-  readonly message: string
+  readonly code = "UNSUPPORTED_DOMAIN";
+  readonly message: string;
 
   constructor(domain: string) {
-    super()
-    this.message = `No evaluation model registered for domain "${domain}"`
+    super();
+    this.message = `No evaluation model registered for domain "${domain}"`;
   }
 }
 
@@ -48,12 +48,12 @@ export class UnsupportedDomainError extends DomainError {
  * The economic context data source could not be loaded.
  */
 export class DataSourceError extends DomainError {
-  readonly code = 'DATA_SOURCE_ERROR'
-  readonly message: string
+  readonly code = "DATA_SOURCE_ERROR";
+  readonly message: string;
 
   constructor(source: string, reason: string) {
-    super()
-    this.message = `Failed to load data from "${source}": ${reason}`
+    super();
+    this.message = `Failed to load data from "${source}": ${reason}`;
   }
 }
 
@@ -61,11 +61,11 @@ export class DataSourceError extends DomainError {
  * The economic context data failed validation.
  */
 export class ValidationError extends DomainError {
-  readonly code = 'VALIDATION_ERROR'
-  readonly message: string
+  readonly code = "VALIDATION_ERROR";
+  readonly message: string;
 
   constructor(field: string, reason: string) {
-    super()
-    this.message = `Validation failed for "${field}": ${reason}`
+    super();
+    this.message = `Validation failed for "${field}": ${reason}`;
   }
 }
