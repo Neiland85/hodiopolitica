@@ -1,0 +1,59 @@
+{
+  "country": "Italy",
+  "actors": [
+    {
+      "id": "governing-party-italy",
+      "name": "Governo italiano (FdI)",
+      "type": "politician",
+      "attributes": {
+        "type": "politician",
+        "votingPower": 26.0,
+        "mediaPresence": 82,
+        "coalitionLeverage": 0.55
+      }
+    },
+    {
+      "id": "opposition-pd-italy",
+      "name": "Opposizione (PD)",
+      "type": "politician",
+      "attributes": {
+        "type": "politician",
+        "votingPower": 19.1,
+        "mediaPresence": 60,
+        "coalitionLeverage": 0.3
+      }
+    },
+    {
+      "id": "camera-deputati-italy",
+      "name": "Camera dei Deputati",
+      "type": "legislative",
+      "attributes": {
+        "type": "legislative",
+        "legislativeCapacity": 0.56,
+        "amendmentPower": 0.4,
+        "vetoPower": false
+      }
+    },
+    {
+      "id": "corte-costituzionale-italy",
+      "name": "Corte Costituzionale",
+      "type": "judicial",
+      "attributes": {
+        "type": "judicial",
+        "legalReviewPower": 0.88,
+        "precedentSetting": 9
+      }
+    },
+    {
+      "id": "public-opinion-italy",
+      "name": "Opinione Pubblica Italiana",
+      "type": "public",
+      "attributes": {
+        "type": "public",
+        "approvalRating": 38,
+        "protestIntensity": 0.45,
+        "electoralImpact": 0.55
+      }
+    }
+  ]
+}

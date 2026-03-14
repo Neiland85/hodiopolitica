@@ -1,0 +1,155 @@
+{
+  "country": "Spain",
+  "votes": [
+    {
+      "policyId": "housing-law-2023",
+      "chamber": "Congreso de los Diputados",
+      "date": "2023-04-27",
+      "result": "approved",
+      "votesFor": 176,
+      "votesAgainst": 167,
+      "abstentions": 7,
+      "totalSeats": 350,
+      "amendments": [
+        {
+          "id": "AM-VIV-001",
+          "description": "Ampliar el tope de alquiler al 5% en zonas tensionadas",
+          "proposedBy": "Unidas Podemos",
+          "status": "approved"
+        },
+        {
+          "id": "AM-VIV-002",
+          "description": "Eximir a pequeños propietarios con menos de 5 viviendas",
+          "proposedBy": "PP",
+          "status": "rejected"
+        },
+        {
+          "id": "AM-VIV-003",
+          "description": "Incluir vivienda turística en la regulación",
+          "proposedBy": "ERC",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "policyId": "housing-law-2023",
+      "chamber": "Senado",
+      "date": "2023-05-17",
+      "result": "amended",
+      "votesFor": 134,
+      "votesAgainst": 125,
+      "abstentions": 6,
+      "totalSeats": 265,
+      "amendments": [
+        {
+          "id": "AM-VIV-S01",
+          "description": "Reducir plazo de desahucio de vulnerables a 12 meses",
+          "proposedBy": "PP",
+          "status": "approved"
+        },
+        {
+          "id": "AM-VIV-S02",
+          "description": "Crear registro nacional de grandes tenedores",
+          "proposedBy": "PSOE",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "policyId": "education-reform-2024",
+      "chamber": "Congreso de los Diputados",
+      "date": "2024-03-15",
+      "result": "approved",
+      "votesFor": 185,
+      "votesAgainst": 152,
+      "abstentions": 13,
+      "totalSeats": 350,
+      "amendments": [
+        {
+          "id": "AM-EDU-001",
+          "description": "Mantener asignatura de religión como optativa evaluable",
+          "proposedBy": "VOX",
+          "status": "rejected"
+        },
+        {
+          "id": "AM-EDU-002",
+          "description": "Ampliar becas para FP dual",
+          "proposedBy": "Sumar",
+          "status": "approved"
+        }
+      ]
+    },
+    {
+      "policyId": "healthcare-reform-2024",
+      "chamber": "Congreso de los Diputados",
+      "date": "2024-06-20",
+      "result": "approved",
+      "votesFor": 198,
+      "votesAgainst": 140,
+      "abstentions": 12,
+      "totalSeats": 350,
+      "amendments": [
+        {
+          "id": "AM-SAN-001",
+          "description": "Incluir salud mental en atención primaria",
+          "proposedBy": "Sumar",
+          "status": "approved"
+        }
+      ]
+    },
+    {
+      "policyId": "economic-plan-2024",
+      "chamber": "Congreso de los Diputados",
+      "date": "2024-09-10",
+      "result": "approved",
+      "votesFor": 177,
+      "votesAgainst": 164,
+      "abstentions": 9,
+      "totalSeats": 350,
+      "amendments": [
+        {
+          "id": "AM-ECO-001",
+          "description": "Reducir impuesto de sociedades para PYMES al 20%",
+          "proposedBy": "PNV",
+          "status": "pending"
+        },
+        {
+          "id": "AM-ECO-002",
+          "description": "Ampliar incentivos fiscales para I+D",
+          "proposedBy": "Ciudadanos",
+          "status": "pending"
+        },
+        {
+          "id": "AM-ECO-003",
+          "description": "Crear fondo soberano de inversión tecnológica",
+          "proposedBy": "PSOE",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "policyId": "green-transition-2024",
+      "chamber": "Congreso de los Diputados",
+      "date": "2024-11-05",
+      "result": "approved",
+      "votesFor": 190,
+      "votesAgainst": 148,
+      "abstentions": 12,
+      "totalSeats": 350,
+      "amendments": [
+        {
+          "id": "AM-ENV-001",
+          "description": "Adelantar cierre de centrales de carbón a 2028",
+          "proposedBy": "Sumar",
+          "status": "pending"
+        },
+        {
+          "id": "AM-ENV-002",
+          "description": "Compensación a comunidades mineras afectadas",
+          "proposedBy": "PSOE",
+          "status": "approved"
+        }
+      ]
+    }
+  ]
+}

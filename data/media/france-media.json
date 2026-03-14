@@ -1,0 +1,14 @@
+{
+  "country": "France",
+  "coverage": [
+    {
+      "policyId": "pension-reform-2023",
+      "period": { "startDate": "2023-01-01", "endDate": "2023-04-30" },
+      "mentionsPerDay": 125,
+      "sentiment": { "positive": 0.20, "negative": 0.55, "neutral": 0.25 },
+      "audienceReach": 22.0,
+      "engagementRate": 0.18,
+      "sources": ["Le Monde", "Le Figaro", "Libération", "France 24", "Twitter/X"]
+    }
+  ]
+}

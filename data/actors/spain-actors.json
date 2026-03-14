@@ -1,0 +1,59 @@
+{
+  "country": "Spain",
+  "actors": [
+    {
+      "id": "governing-party-spain",
+      "name": "Gobierno de España (PSOE)",
+      "type": "politician",
+      "attributes": {
+        "type": "politician",
+        "votingPower": 35.7,
+        "mediaPresence": 85,
+        "coalitionLeverage": 0.6
+      }
+    },
+    {
+      "id": "opposition-pp-spain",
+      "name": "Oposición principal (PP)",
+      "type": "politician",
+      "attributes": {
+        "type": "politician",
+        "votingPower": 33.1,
+        "mediaPresence": 72,
+        "coalitionLeverage": 0.3
+      }
+    },
+    {
+      "id": "congress-spain",
+      "name": "Congreso de los Diputados",
+      "type": "legislative",
+      "attributes": {
+        "type": "legislative",
+        "legislativeCapacity": 0.52,
+        "amendmentPower": 0.45,
+        "vetoPower": false
+      }
+    },
+    {
+      "id": "tribunal-constitucional-spain",
+      "name": "Tribunal Constitucional",
+      "type": "judicial",
+      "attributes": {
+        "type": "judicial",
+        "legalReviewPower": 0.85,
+        "precedentSetting": 7
+      }
+    },
+    {
+      "id": "public-opinion-spain",
+      "name": "Opinión Pública Española",
+      "type": "public",
+      "attributes": {
+        "type": "public",
+        "approvalRating": 42,
+        "protestIntensity": 0.35,
+        "electoralImpact": 0.7
+      }
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "country": "Spain",
+  "reactions": [
+    {
+      "policyId": "housing-law-2023",
+      "dataPoints": [
+        { "date": "2023-04-01", "approvalRating": 58, "protestIntensity": 0.15, "mediaEngagement": 0.6, "electoralShift": 1.2 },
+        { "date": "2023-05-01", "approvalRating": 55, "protestIntensity": 0.25, "mediaEngagement": 0.7, "electoralShift": 0.5 },
+        { "date": "2023-06-01", "approvalRating": 52, "protestIntensity": 0.30, "mediaEngagement": 0.65, "electoralShift": -0.3 },
+        { "date": "2023-09-01", "approvalRating": 48, "protestIntensity": 0.35, "mediaEngagement": 0.55, "electoralShift": -1.1 },
+        { "date": "2023-12-01", "approvalRating": 45, "protestIntensity": 0.40, "mediaEngagement": 0.50, "electoralShift": -1.5 },
+        { "date": "2024-03-01", "approvalRating": 47, "protestIntensity": 0.30, "mediaEngagement": 0.45, "electoralShift": -0.8 }
+      ]
+    },
+    {
+      "policyId": "education-reform-2024",
+      "dataPoints": [
+        { "date": "2024-03-01", "approvalRating": 62, "protestIntensity": 0.10, "mediaEngagement": 0.45, "electoralShift": 0.8 },
+        { "date": "2024-06-01", "approvalRating": 64, "protestIntensity": 0.08, "mediaEngagement": 0.40, "electoralShift": 1.2 },
+        { "date": "2024-09-01", "approvalRating": 65, "protestIntensity": 0.05, "mediaEngagement": 0.35, "electoralShift": 1.5 },
+        { "date": "2024-12-01", "approvalRating": 67, "protestIntensity": 0.04, "mediaEngagement": 0.30, "electoralShift": 1.8 }
+      ]
+    },
+    {
+      "policyId": "healthcare-reform-2024",
+      "dataPoints": [
+        { "date": "2024-06-01", "approvalRating": 70, "protestIntensity": 0.05, "mediaEngagement": 0.50, "electoralShift": 2.0 },
+        { "date": "2024-09-01", "approvalRating": 72, "protestIntensity": 0.03, "mediaEngagement": 0.45, "electoralShift": 2.3 },
+        { "date": "2024-12-01", "approvalRating": 73, "protestIntensity": 0.02, "mediaEngagement": 0.40, "electoralShift": 2.5 }
+      ]
+    },
+    {
+      "policyId": "economic-plan-2024",
+      "dataPoints": [
+        { "date": "2024-09-01", "approvalRating": 42, "protestIntensity": 0.20, "mediaEngagement": 0.55, "electoralShift": -0.5 },
+        { "date": "2024-12-01", "approvalRating": 40, "protestIntensity": 0.25, "mediaEngagement": 0.60, "electoralShift": -1.2 },
+        { "date": "2025-03-01", "approvalRating": 38, "protestIntensity": 0.30, "mediaEngagement": 0.65, "electoralShift": -2.0 }
+      ]
+    },
+    {
+      "policyId": "green-transition-2024",
+      "dataPoints": [
+        { "date": "2024-11-01", "approvalRating": 55, "protestIntensity": 0.15, "mediaEngagement": 0.50, "electoralShift": 0.5 },
+        { "date": "2025-02-01", "approvalRating": 53, "protestIntensity": 0.20, "mediaEngagement": 0.55, "electoralShift": 0.2 },
+        { "date": "2025-05-01", "approvalRating": 56, "protestIntensity": 0.12, "mediaEngagement": 0.45, "electoralShift": 0.8 }
+      ]
+    }
+  ]
+}

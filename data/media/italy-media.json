@@ -1,0 +1,14 @@
+{
+  "country": "Italy",
+  "coverage": [
+    {
+      "policyId": "immigration-policy-2023",
+      "period": { "startDate": "2023-06-01", "endDate": "2023-09-30" },
+      "mentionsPerDay": 95,
+      "sentiment": { "positive": 0.25, "negative": 0.50, "neutral": 0.25 },
+      "audienceReach": 15.0,
+      "engagementRate": 0.15,
+      "sources": ["Corriere della Sera", "La Repubblica", "Il Sole 24 Ore", "RAI"]
+    }
+  ]
+}
