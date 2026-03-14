@@ -4,3 +4,17 @@ dist
 coverage
 .DS_Store
 *.log
+
+# Next.js
+.next
+out
+
+# Node
+node_modules
+
+# Environment
+.env
+.env.local
+
+# Logs
+*.log
