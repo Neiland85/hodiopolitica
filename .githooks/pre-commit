@@ -1,0 +1,33 @@
+#!/bin/sh
+# SPDX-License-Identifier: BUSL-1.1
+# Copyright (c) 2026 Clarity Structures Digital S.L.
+#
+# Pre-commit hook: runs typecheck and lint before allowing commits.
+# Catches errors early, before they reach CI.
+#
+# Setup: git config core.hooksPath .githooks
+
+echo "Running pre-commit checks..."
+
+# Typecheck
+echo "  TypeScript typecheck..."
+npm run typecheck --silent 2>/dev/null
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "  TypeScript typecheck failed. Fix errors before committing."
+  echo ""
+  exit 1
+fi
+
+# Lint (Biome)
+echo "  Biome lint..."
+npm run lint --silent 2>/dev/null
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "  Lint check failed. Run 'npm run lint:fix' and review changes."
+  echo ""
+  exit 1
+fi
+
+echo "  All pre-commit checks passed."
+exit 0

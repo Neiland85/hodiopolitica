@@ -6,9 +6,10 @@ dist/
 build/
 *.tsbuildinfo
 
-# Next.js
+# Next.js / Turbopack
 .next/
 out/
+.turbo/
 
 # Environment
 .env
@@ -17,6 +18,7 @@ out/
 
 # IDE
 .idea/
+.vscode/
 *.swp
 *.swo
 
@@ -30,3 +32,7 @@ npm-debug.log*
 
 # Test coverage
 coverage/
+
+# Duplicate lockfiles (only root lockfile should exist)
+apps/**/package-lock.json
+packages/**/package-lock.json

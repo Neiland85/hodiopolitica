@@ -1,0 +1,26 @@
+#!/bin/sh
+# SPDX-License-Identifier: BUSL-1.1
+# Copyright (c) 2026 Clarity Structures Digital S.L.
+#
+# Pre-push hook: prevents direct pushes to main/master.
+# Forces use of feature branches + Pull Requests.
+#
+# NOTE: This is a LOCAL safety net only. Server-side branch protection
+# (GitHub Rulesets) is the definitive barrier — hooks can be bypassed
+# with --no-verify.
+#
+# Setup: git config core.hooksPath .githooks
+
+branch="$(git symbolic-ref --short HEAD 2>/dev/null)"
+
+if [ "$branch" = "main" ] || [ "$branch" = "master" ]; then
+  echo ""
+  echo "================================================================"
+  echo "  Push bloqueado: no se permite push directo a main/master."
+  echo "  Usa una rama feature/* y abre un Pull Request."
+  echo "================================================================"
+  echo ""
+  exit 1
+fi
+
+exit 0
