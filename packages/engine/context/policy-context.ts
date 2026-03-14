@@ -4,13 +4,13 @@
  */
 export interface EconomicIndicators {
   /** Annual inflation rate (%) - Source: INE/Eurostat */
-  inflation: number
+  inflation: number;
   /** Unemployment rate (%) - Source: INE/Eurostat */
-  unemployment: number
+  unemployment: number;
   /** Housing price index (base 100) - Source: INE */
-  housing_price_index: number
+  housing_price_index: number;
   /** Annual GDP growth rate (%) - Source: Banco de España */
-  gdp_growth: number
+  gdp_growth: number;
 }
 
 /**
@@ -18,8 +18,8 @@ export interface EconomicIndicators {
  * Provides the country-level economic backdrop for analysis.
  */
 export interface PolicyContext {
-  country: string
-  year: number
-  indicators: EconomicIndicators
-  sources: string[]
+  country: string;
+  year: number;
+  indicators: EconomicIndicators;
+  sources: string[];
 }

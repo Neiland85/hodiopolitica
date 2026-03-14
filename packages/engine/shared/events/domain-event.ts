@@ -24,26 +24,21 @@
 
 export interface DomainEvent<T = unknown> {
   /** Unique event identifier */
-  readonly id: string
+  readonly id: string;
   /** Event type name (PascalCase by convention) */
-  readonly type: string
+  readonly type: string;
   /** When the event occurred */
-  readonly timestamp: Date
+  readonly timestamp: Date;
   /** The module that emitted the event */
-  readonly source: string
+  readonly source: string;
   /** Event-specific data */
-  readonly payload: T
+  readonly payload: T;
   /** Correlation ID for tracing across event chains */
-  readonly correlationId?: string
+  readonly correlationId?: string;
 }
 
 /** Creates a new domain event with auto-generated id and timestamp. */
-export function createEvent<T>(
-  type: string,
-  source: string,
-  payload: T,
-  correlationId?: string,
-): DomainEvent<T> {
+export function createEvent<T>(type: string, source: string, payload: T, correlationId?: string): DomainEvent<T> {
   return {
     id: generateEventId(),
     type,
@@ -51,11 +46,11 @@ export function createEvent<T>(
     source,
     payload,
     correlationId,
-  }
+  };
 }
 
-let counter = 0
+let counter = 0;
 function generateEventId(): string {
-  counter += 1
-  return `evt_${Date.now()}_${counter}`
+  counter += 1;
+  return `evt_${Date.now()}_${counter}`;
 }

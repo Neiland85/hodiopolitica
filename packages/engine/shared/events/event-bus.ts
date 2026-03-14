@@ -1,12 +1,12 @@
-import type { DomainEvent } from './domain-event'
-import { createLogger } from '../logger/logger'
+import { createLogger } from "../logger/logger";
+import type { DomainEvent } from "./domain-event";
 
-const logger = createLogger('event-bus')
+const logger = createLogger("event-bus");
 
 /**
  * Handler function for domain events.
  */
-export type EventHandler<T = unknown> = (event: DomainEvent<T>) => void | Promise<void>
+export type EventHandler<T = unknown> = (event: DomainEvent<T>) => void | Promise<void>;
 
 /**
  * In-process EventBus — synchronous publish/subscribe.
@@ -19,12 +19,12 @@ export type EventHandler<T = unknown> = (event: DomainEvent<T>) => void | Promis
  *   - Can be replaced with async (RabbitMQ/Kafka) when moving to microservices
  */
 export class EventBus {
-  private handlers = new Map<string, EventHandler[]>()
-  private history: DomainEvent[] = []
-  private readonly maxHistory: number
+  private handlers = new Map<string, EventHandler[]>();
+  private history: DomainEvent[] = [];
+  private readonly maxHistory: number;
 
   constructor(maxHistory = 1000) {
-    this.maxHistory = maxHistory
+    this.maxHistory = maxHistory;
   }
 
   /**
@@ -32,20 +32,20 @@ export class EventBus {
    * Returns an unsubscribe function.
    */
   subscribe<T = unknown>(eventType: string, handler: EventHandler<T>): () => void {
-    const existing = this.handlers.get(eventType) || []
-    existing.push(handler as EventHandler)
-    this.handlers.set(eventType, existing)
+    const existing = this.handlers.get(eventType) || [];
+    existing.push(handler as EventHandler);
+    this.handlers.set(eventType, existing);
 
-    logger.debug(`Subscribed to "${eventType}"`, { totalHandlers: existing.length })
+    logger.debug(`Subscribed to "${eventType}"`, { totalHandlers: existing.length });
 
     return () => {
-      const handlers = this.handlers.get(eventType) || []
-      const index = handlers.indexOf(handler as EventHandler)
+      const handlers = this.handlers.get(eventType) || [];
+      const index = handlers.indexOf(handler as EventHandler);
       if (index >= 0) {
-        handlers.splice(index, 1)
-        logger.debug(`Unsubscribed from "${eventType}"`, { totalHandlers: handlers.length })
+        handlers.splice(index, 1);
+        logger.debug(`Unsubscribed from "${eventType}"`, { totalHandlers: handlers.length });
       }
-    }
+    };
   }
 
   /**
@@ -54,27 +54,27 @@ export class EventBus {
    */
   publish<T>(event: DomainEvent<T>): void {
     // Record in history
-    this.history.push(event)
+    this.history.push(event);
     if (this.history.length > this.maxHistory) {
-      this.history.shift()
+      this.history.shift();
     }
 
     logger.info(`Event published: ${event.type}`, {
       eventId: event.id,
       source: event.source,
       correlationId: event.correlationId,
-    })
+    });
 
-    const handlers = this.handlers.get(event.type) || []
+    const handlers = this.handlers.get(event.type) || [];
 
     for (const handler of handlers) {
       try {
-        handler(event)
+        handler(event);
       } catch (err) {
         logger.error(`Handler failed for event "${event.type}"`, {
           eventId: event.id,
           error: (err as Error).message,
-        })
+        });
       }
     }
   }
@@ -84,21 +84,21 @@ export class EventBus {
    */
   getHistory(eventType?: string): readonly DomainEvent[] {
     if (eventType) {
-      return this.history.filter((e) => e.type === eventType)
+      return this.history.filter((e) => e.type === eventType);
     }
-    return [...this.history]
+    return [...this.history];
   }
 
   /**
    * Clear all subscriptions and history. Used in tests.
    */
   reset(): void {
-    this.handlers.clear()
-    this.history = []
+    this.handlers.clear();
+    this.history = [];
   }
 }
 
 /**
  * Singleton EventBus instance for the application.
  */
-export const eventBus = new EventBus()
+export const eventBus = new EventBus();

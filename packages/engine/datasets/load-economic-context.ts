@@ -1,21 +1,21 @@
-import fs from 'fs'
-import path from 'path'
-import type { PolicyContext } from '../context/policy-context'
+import fs from "node:fs";
+import path from "node:path";
+import type { PolicyContext } from "../context/policy-context";
 
 /**
  * Raw shape of the JSON data file.
  * Used for runtime validation before casting to PolicyContext.
  */
 interface RawEconomicData {
-  country?: unknown
-  year?: unknown
+  country?: unknown;
+  year?: unknown;
   indicators?: {
-    inflation?: unknown
-    unemployment?: unknown
-    housing_price_index?: unknown
-    gdp_growth?: unknown
-  }
-  sources?: unknown[]
+    inflation?: unknown;
+    unemployment?: unknown;
+    housing_price_index?: unknown;
+    gdp_growth?: unknown;
+  };
+  sources?: unknown[];
 }
 
 /**
@@ -25,57 +25,57 @@ interface RawEconomicData {
  * @returns Validated PolicyContext object
  * @throws Error if file is missing, malformed, or fails validation
  */
-export function loadEconomicContext(filename = 'spain-economic-context.json'): PolicyContext {
-  const datasetPath = path.resolve(__dirname, '../../../data/sources', filename)
+export function loadEconomicContext(filename = "spain-economic-context.json"): PolicyContext {
+  const datasetPath = path.resolve(__dirname, "../../../data/sources", filename);
 
   if (!fs.existsSync(datasetPath)) {
-    throw new Error(`Economic context file not found: ${datasetPath}`)
+    throw new Error(`Economic context file not found: ${datasetPath}`);
   }
 
-  let raw: string
+  let raw: string;
   try {
-    raw = fs.readFileSync(datasetPath, 'utf-8')
+    raw = fs.readFileSync(datasetPath, "utf-8");
   } catch (err) {
-    throw new Error(`Failed to read economic context file: ${(err as Error).message}`)
+    throw new Error(`Failed to read economic context file: ${(err as Error).message}`);
   }
 
-  let data: RawEconomicData
+  let data: RawEconomicData;
   try {
-    data = JSON.parse(raw)
+    data = JSON.parse(raw);
   } catch (err) {
-    throw new Error(`Invalid JSON in economic context file: ${(err as Error).message}`)
+    throw new Error(`Invalid JSON in economic context file: ${(err as Error).message}`);
   }
 
-  return validateEconomicContext(data)
+  return validateEconomicContext(data);
 }
 
 /**
  * Validates raw parsed data against the PolicyContext schema.
  */
 function validateEconomicContext(data: RawEconomicData): PolicyContext {
-  if (typeof data.country !== 'string' || data.country.length === 0) {
-    throw new Error('Economic context: "country" must be a non-empty string')
+  if (typeof data.country !== "string" || data.country.length === 0) {
+    throw new Error('Economic context: "country" must be a non-empty string');
   }
 
-  if (typeof data.year !== 'number' || !Number.isInteger(data.year)) {
-    throw new Error('Economic context: "year" must be an integer')
+  if (typeof data.year !== "number" || !Number.isInteger(data.year)) {
+    throw new Error('Economic context: "year" must be an integer');
   }
 
-  if (!data.indicators || typeof data.indicators !== 'object') {
-    throw new Error('Economic context: "indicators" must be an object')
+  if (!data.indicators || typeof data.indicators !== "object") {
+    throw new Error('Economic context: "indicators" must be an object');
   }
 
-  const requiredIndicators = ['inflation', 'unemployment', 'housing_price_index', 'gdp_growth'] as const
+  const requiredIndicators = ["inflation", "unemployment", "housing_price_index", "gdp_growth"] as const;
 
   for (const key of requiredIndicators) {
-    const value = data.indicators[key]
-    if (typeof value !== 'number' || isNaN(value)) {
-      throw new Error(`Economic context: indicator "${key}" must be a valid number, got ${value}`)
+    const value = data.indicators[key];
+    if (typeof value !== "number" || Number.isNaN(value)) {
+      throw new Error(`Economic context: indicator "${key}" must be a valid number, got ${value}`);
     }
   }
 
   if (!Array.isArray(data.sources)) {
-    throw new Error('Economic context: "sources" must be an array')
+    throw new Error('Economic context: "sources" must be an array');
   }
 
   return {
@@ -88,5 +88,5 @@ function validateEconomicContext(data: RawEconomicData): PolicyContext {
       gdp_growth: data.indicators.gdp_growth as number,
     },
     sources: data.sources.map(String),
-  }
+  };
 }

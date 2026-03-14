@@ -1,55 +1,55 @@
-import type { PolicyDecision } from '../policy/policy-decision'
-import type { PolicyMetric, MetricThresholds } from '../metrics/policy-metric'
-import type { EconomicContextRepository } from '../repositories/economic-context-repository'
-import type { Result } from '../shared/result/result'
-import type { DomainError } from '../shared/errors/domain-error'
-import { ok, fail } from '../shared/result/result'
-import { evaluatePolicy } from '../analysis/policy-engine'
-import { classifyMetricSeverity } from '../metrics/policy-metric'
-import { createEvent } from '../shared/events/domain-event'
-import { eventBus } from '../shared/events/event-bus'
-import { PolicyEventTypes } from '../shared/events/policy-events'
-import type { PolicyEvaluatedPayload, PolicyEvaluationFailedPayload } from '../shared/events/policy-events'
-import { createLogger } from '../shared/logger/logger'
+import { evaluatePolicy } from "../analysis/policy-engine";
+import type { MetricThresholds, PolicyMetric } from "../metrics/policy-metric";
+import { classifyMetricSeverity } from "../metrics/policy-metric";
+import type { PolicyDecision } from "../policy/policy-decision";
+import type { EconomicContextRepository } from "../repositories/economic-context-repository";
+import type { DomainError } from "../shared/errors/domain-error";
+import { createEvent } from "../shared/events/domain-event";
+import { eventBus } from "../shared/events/event-bus";
+import type { PolicyEvaluatedPayload, PolicyEvaluationFailedPayload } from "../shared/events/policy-events";
+import { PolicyEventTypes } from "../shared/events/policy-events";
+import { createLogger } from "../shared/logger/logger";
+import type { Result } from "../shared/result/result";
+import { ok } from "../shared/result/result";
 
-const logger = createLogger('usecase.evaluate-policy')
+const logger = createLogger("usecase.evaluate-policy");
 
 /**
  * Command DTO for policy evaluation.
  */
 export interface EvaluatePolicyCommand {
-  policy: PolicyDecision
-  country: string
-  correlationId?: string
+  policy: PolicyDecision;
+  country: string;
+  correlationId?: string;
 }
 
 /**
  * Result of a successful evaluation.
  */
 export interface EvaluationResult {
-  policy: { id: string; title: string; domain: string }
-  context: { country: string; year: number; sources: string[] }
-  metrics: EvaluatedMetric[]
-  durationMs: number
-  evaluatedAt: string
+  policy: { id: string; title: string; domain: string };
+  context: { country: string; year: number; sources: string[] };
+  metrics: EvaluatedMetric[];
+  durationMs: number;
+  evaluatedAt: string;
 }
 
 export interface EvaluatedMetric {
-  policyId: string
-  metricName: string
-  value: number
-  source: string
-  description: string
-  severity: 'low' | 'moderate' | 'high' | 'critical'
+  policyId: string;
+  metricName: string;
+  value: number;
+  source: string;
+  description: string;
+  severity: "low" | "moderate" | "high" | "critical";
 }
 
 /** Thresholds per metric for severity classification. */
 const METRIC_THRESHOLDS: Record<string, MetricThresholds> = {
   housing_pressure: { moderate: 30, high: 60, critical: 90 },
   social_stress: { moderate: 20, high: 40, critical: 60 },
-}
+};
 
-const DEFAULT_THRESHOLDS: MetricThresholds = { moderate: 30, high: 60, critical: 90 }
+const DEFAULT_THRESHOLDS: MetricThresholds = { moderate: 30, high: 60, critical: 90 };
 
 /**
  * Use Case: Evaluate a Policy
@@ -68,26 +68,26 @@ export class EvaluatePolicyUseCase {
   constructor(private readonly contextRepo: EconomicContextRepository) {}
 
   execute(command: EvaluatePolicyCommand): Result<EvaluationResult, DomainError> {
-    const start = Date.now()
+    const start = Date.now();
 
-    logger.info('Evaluating policy', {
+    logger.info("Evaluating policy", {
       policyId: command.policy.id,
       domain: command.policy.domain,
       country: command.country,
-    })
+    });
 
     // 1. Load context
-    const contextResult = this.contextRepo.findByCountry(command.country)
+    const contextResult = this.contextRepo.findByCountry(command.country);
 
     if (!contextResult.ok) {
-      this.publishFailureEvent(command, contextResult.error)
-      return contextResult
+      this.publishFailureEvent(command, contextResult.error);
+      return contextResult;
     }
 
-    const context = contextResult.value
+    const context = contextResult.value;
 
     // 2. Evaluate
-    const rawMetrics: PolicyMetric[] = evaluatePolicy(command.policy, context)
+    const rawMetrics: PolicyMetric[] = evaluatePolicy(command.policy, context);
 
     // 3. Classify severity
     const metrics: EvaluatedMetric[] = rawMetrics.map((m) => ({
@@ -97,9 +97,9 @@ export class EvaluatePolicyUseCase {
       source: m.source,
       description: m.description,
       severity: classifyMetricSeverity(m.value, METRIC_THRESHOLDS[m.metricName] || DEFAULT_THRESHOLDS),
-    }))
+    }));
 
-    const durationMs = Date.now() - start
+    const durationMs = Date.now() - start;
 
     // 4. Build result
     const result: EvaluationResult = {
@@ -116,18 +116,18 @@ export class EvaluatePolicyUseCase {
       metrics,
       durationMs,
       evaluatedAt: new Date().toISOString(),
-    }
+    };
 
     // 5. Publish success event
-    this.publishSuccessEvent(command, result)
+    this.publishSuccessEvent(command, result);
 
-    logger.info('Policy evaluated successfully', {
+    logger.info("Policy evaluated successfully", {
       policyId: command.policy.id,
       metricsCount: metrics.length,
       durationMs,
-    })
+    });
 
-    return ok(result)
+    return ok(result);
   }
 
   private publishSuccessEvent(command: EvaluatePolicyCommand, result: EvaluationResult): void {
@@ -143,11 +143,11 @@ export class EvaluatePolicyUseCase {
         severity: m.severity,
       })),
       durationMs: result.durationMs,
-    }
+    };
 
     eventBus.publish(
-      createEvent(PolicyEventTypes.PolicyEvaluated, 'evaluate-policy-usecase', payload, command.correlationId),
-    )
+      createEvent(PolicyEventTypes.PolicyEvaluated, "evaluate-policy-usecase", payload, command.correlationId),
+    );
   }
 
   private publishFailureEvent(command: EvaluatePolicyCommand, error: DomainError): void {
@@ -156,10 +156,10 @@ export class EvaluatePolicyUseCase {
       domain: command.policy.domain,
       errorCode: error.code,
       errorMessage: error.message,
-    }
+    };
 
     eventBus.publish(
-      createEvent(PolicyEventTypes.PolicyEvaluationFailed, 'evaluate-policy-usecase', payload, command.correlationId),
-    )
+      createEvent(PolicyEventTypes.PolicyEvaluationFailed, "evaluate-policy-usecase", payload, command.correlationId),
+    );
   }
 }

@@ -1,6 +1,6 @@
-import type { PolicyDecision } from '../policy/policy-decision'
-import type { PolicyContext } from '../context/policy-context'
-import type { PolicyMetric } from '../metrics/policy-metric'
+import type { PolicyContext } from "../context/policy-context";
+import type { PolicyMetric } from "../metrics/policy-metric";
+import type { PolicyDecision } from "../policy/policy-decision";
 
 /**
  * Housing Policy Evaluation Model
@@ -37,33 +37,30 @@ import type { PolicyMetric } from '../metrics/policy-metric'
  *   - 40-60: High — risk of social unrest
  *   - > 60:  Critical — systemic instability
  */
-export function evaluateHousingPolicy(
-  decision: PolicyDecision,
-  context: PolicyContext,
-): PolicyMetric[] {
-  const { inflation, unemployment, housing_price_index } = context.indicators
+export function evaluateHousingPolicy(decision: PolicyDecision, context: PolicyContext): PolicyMetric[] {
+  const { inflation, unemployment, housing_price_index } = context.indicators;
 
-  const housingPressure = housing_price_index * (inflation / 10)
-  const socialStress = unemployment * inflation
+  const housingPressure = housing_price_index * (inflation / 10);
+  const socialStress = unemployment * inflation;
 
   return [
     {
       policyId: decision.id,
-      metricName: 'housing_pressure',
+      metricName: "housing_pressure",
       value: Math.round(housingPressure * 100) / 100,
-      source: 'housing-policy-model',
+      source: "housing-policy-model",
       timestamp: new Date(),
       description:
-        'Measures how inflation amplifies housing cost pressure. Based on housing price index scaled by inflation rate.',
+        "Measures how inflation amplifies housing cost pressure. Based on housing price index scaled by inflation rate.",
     },
     {
       policyId: decision.id,
-      metricName: 'social_stress',
+      metricName: "social_stress",
       value: Math.round(socialStress * 100) / 100,
-      source: 'housing-policy-model',
+      source: "housing-policy-model",
       timestamp: new Date(),
       description:
-        'Misery Index variant: product of unemployment and inflation. Captures combined economic distress affecting citizens.',
+        "Misery Index variant: product of unemployment and inflation. Captures combined economic distress affecting citizens.",
     },
-  ]
+  ];
 }

@@ -15,24 +15,24 @@
  * ```
  */
 
-export type Result<T, E = Error> = Success<T> | Failure<E>
+export type Result<T, E = Error> = Success<T> | Failure<E>;
 
 export interface Success<T> {
-  readonly ok: true
-  readonly value: T
+  readonly ok: true;
+  readonly value: T;
 }
 
 export interface Failure<E> {
-  readonly ok: false
-  readonly error: E
+  readonly ok: false;
+  readonly error: E;
 }
 
 export function ok<T>(value: T): Success<T> {
-  return { ok: true, value }
+  return { ok: true, value };
 }
 
 export function fail<E>(error: E): Failure<E> {
-  return { ok: false, error }
+  return { ok: false, error };
 }
 
 /**
@@ -40,20 +40,17 @@ export function fail<E>(error: E): Failure<E> {
  */
 export function map<T, U, E>(result: Result<T, E>, fn: (value: T) => U): Result<U, E> {
   if (result.ok) {
-    return ok(fn(result.value))
+    return ok(fn(result.value));
   }
-  return result
+  return result;
 }
 
 /**
  * Chains results — useful when the mapping function itself can fail.
  */
-export function flatMap<T, U, E>(
-  result: Result<T, E>,
-  fn: (value: T) => Result<U, E>,
-): Result<U, E> {
+export function flatMap<T, U, E>(result: Result<T, E>, fn: (value: T) => Result<U, E>): Result<U, E> {
   if (result.ok) {
-    return fn(result.value)
+    return fn(result.value);
   }
-  return result
+  return result;
 }

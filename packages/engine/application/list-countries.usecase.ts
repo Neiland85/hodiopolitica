@@ -1,6 +1,6 @@
-import type { EconomicContextRepository } from '../repositories/economic-context-repository'
-import type { Result } from '../shared/result/result'
-import type { DomainError } from '../shared/errors/domain-error'
+import type { EconomicContextRepository } from "../repositories/economic-context-repository";
+import type { DomainError } from "../shared/errors/domain-error";
+import type { Result } from "../shared/result/result";
 
 /**
  * Use Case: List Available Countries
@@ -12,6 +12,6 @@ export class ListCountriesUseCase {
   constructor(private readonly contextRepo: EconomicContextRepository) {}
 
   execute(): Result<string[], DomainError> {
-    return this.contextRepo.listAvailableCountries()
+    return this.contextRepo.listAvailableCountries();
   }
 }
