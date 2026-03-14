@@ -1,15 +1,17 @@
 {
   "name": "hodiopolitica",
   "version": "1.0.0",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
+  "private": true,
+  "type": "commonjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "engine": "ts-node run-policy-analysis.ts",
+    "api": "ts-node apps/api/server/server.ts",
+    "web": "cd apps/web && npm run dev",
+    "dev": "ts-node apps/api/server/server.ts"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.0",
+    "@types/node": "^20.0.0"
+  }
 }

@@ -1,0 +1,15 @@
+{
+  "country": "Spain",
+  "year": 2023,
+  "indicators": {
+    "inflation": 3.5,
+    "unemployment": 12.1,
+    "housing_price_index": 148.2,
+    "gdp_growth": 2.5
+  },
+  "sources": [
+    "INE",
+    "Eurostat",
+    "Banco de España"
+  ]
+}
