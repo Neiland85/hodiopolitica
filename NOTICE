@@ -1,0 +1,28 @@
+HodioPolitica
+Copyright (c) 2026 Clarity Structures Digital S.L.
+
+This product is licensed under the Business Source License 1.1 (BUSL-1.1).
+See the LICENSE file for the full license text.
+
+Change Date:    2030-03-14
+Change License: Apache License, Version 2.0
+
+Third-Party Notices
+-------------------
+
+This product includes software developed by third parties:
+
+- Express (MIT License) - https://expressjs.com/
+- Next.js (MIT License) - https://nextjs.org/
+- React (MIT License) - https://react.dev/
+- Helmet (MIT License) - https://helmetjs.github.io/
+- express-rate-limit (MIT License) - https://github.com/express-rate-limit/express-rate-limit
+- Vitest (MIT License) - https://vitest.dev/
+- TypeScript (Apache-2.0 License) - https://www.typescriptlang.org/
+- Biome (MIT License) - https://biomejs.dev/
+
+Business Source License Notice
+------------------------------
+
+License text copyright (c) 2017 MariaDB Corporation Ab, All Rights Reserved.
+"Business Source License" is a trademark of MariaDB Corporation Ab.
