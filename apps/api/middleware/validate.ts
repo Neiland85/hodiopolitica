@@ -1,13 +1,9 @@
 // SPDX-License-Identifier: BUSL-1.1
 // Copyright (c) 2026 Clarity Structures Digital S.L.
 
+import type { CompareCountriesRequest, ErrorResponse, EvaluatePolicyRequest } from "@hodiopolitica/contracts";
+import { VALID_DOMAINS } from "@hodiopolitica/contracts";
 import type { NextFunction, Request, Response } from "express";
-import type {
-  CompareCountriesRequest,
-  ErrorResponse,
-  EvaluatePolicyRequest,
-} from "../../../packages/contracts/src/index";
-import { VALID_DOMAINS } from "../../../packages/contracts/src/index";
 
 /**
  * Validation middleware factory.

@@ -33,10 +33,10 @@ All economic context data resides in `data/sources/` with the following structur
 
 ```
 data/sources/
-  spain.json      # Spain economic indicators
-  france.json     # France economic indicators
-  germany.json    # Germany economic indicators
-  italy.json      # Italy economic indicators
+  spain-economic-context.json      # Spain economic indicators
+  france-economic-context.json     # France economic indicators
+  germany-economic-context.json    # Germany economic indicators
+  italy-economic-context.json      # Italy economic indicators
 ```
 
 ### Source Attribution
@@ -58,7 +58,7 @@ Each data file must include:
 ### Validation Layers
 
 1. **TypeScript Types**: Schema enforcement at compile time
-2. **Domain Models**: Economic indicators bounded by domain-specific models (housing, education)
+2. **Domain Models**: Economic indicators bounded by domain-specific models (housing, education, healthcare, economy, environment)
 3. **Repository Pattern**: Centralized data access through validated repositories
 4. **Result Monad**: All data operations return `Result<T, E>` — errors are explicit, never silent
 

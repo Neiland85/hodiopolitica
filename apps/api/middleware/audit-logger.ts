@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: BUSL-1.1
 // Copyright (c) 2026 Clarity Structures Digital S.L.
 
+import { createEvent } from "@hodiopolitica/engine/shared/events/domain-event";
+import { eventBus } from "@hodiopolitica/engine/shared/events/event-bus";
+import { createLogger } from "@hodiopolitica/engine/shared/logger/logger";
 import type { NextFunction, Request, Response } from "express";
-import { createEvent } from "../../../packages/engine/shared/events/domain-event";
-import { eventBus } from "../../../packages/engine/shared/events/event-bus";
-import { createLogger } from "../../../packages/engine/shared/logger/logger";
 import type { SecurityAuditPayload } from "../events/security-events";
 import { SecurityEventTypes } from "../events/security-events";
 

@@ -3,6 +3,7 @@
     "target": "ES2020",
     "module": "commonjs",
     "rootDir": ".",
+    "baseUrl": ".",
     "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,
@@ -11,7 +12,12 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "paths": {
+      "@hodiopolitica/engine": ["packages/engine/index.ts"],
+      "@hodiopolitica/engine/*": ["packages/engine/*"],
+      "@hodiopolitica/contracts": ["packages/contracts/src/index.ts"]
+    }
   },
   "include": [
     "packages/**/*.ts",

@@ -118,13 +118,13 @@ describe("EvaluatePolicyUseCase", () => {
   });
 
   it("should return fallback metric for unsupported domain", () => {
-    const healthcarePolicy: PolicyDecision = {
+    const transportPolicy: PolicyDecision = {
       ...housingPolicy,
-      id: "healthcare-test",
-      domain: "healthcare",
+      id: "transport-test",
+      domain: "transport" as PolicyDecision["domain"],
     };
 
-    const result = useCase.execute({ policy: healthcarePolicy, country: "spain" });
+    const result = useCase.execute({ policy: transportPolicy, country: "spain" });
 
     expect(result.ok).toBe(true);
     if (result.ok) {

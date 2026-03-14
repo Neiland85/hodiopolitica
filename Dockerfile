@@ -6,18 +6,17 @@ COPY package.json package-lock.json ./
 COPY packages/engine/package.json packages/engine/
 COPY packages/contracts/package.json packages/contracts/
 COPY apps/api/package.json apps/api/
-RUN npm ci --omit=dev
+RUN npm ci
 
-# ─── Stage 2: Build ─────────────────────────────────────────
+# ─── Stage 2: Build (compile TypeScript to JavaScript) ───────
 FROM node:20-alpine AS builder
 
 WORKDIR /app
 COPY package.json package-lock.json tsconfig.json ./
 COPY packages/ packages/
 COPY apps/api/ apps/api/
-COPY data/ data/
 COPY --from=deps /app/node_modules node_modules
-RUN npx tsc --noEmit
+RUN npx tsc --outDir dist --declaration false --declarationMap false --sourceMap false
 
 # ─── Stage 3: Production image ──────────────────────────────
 FROM node:20-alpine AS runner
@@ -27,17 +26,17 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=3001
 
-# Install only production deps + ts-node for runtime
+# Production dependencies only (reinstall without dev deps)
 COPY package.json package-lock.json ./
 COPY packages/engine/package.json packages/engine/
 COPY packages/contracts/package.json packages/contracts/
 COPY apps/api/package.json apps/api/
-RUN npm ci && npm cache clean --force
+RUN npm ci --omit=dev && npm cache clean --force
 
-# Copy source (ts-node runs TypeScript directly)
-COPY tsconfig.json ./
-COPY packages/ packages/
-COPY apps/api/ apps/api/
+# Compiled JavaScript from builder (no TypeScript in production)
+COPY --from=builder /app/dist ./dist
+
+# Data files (read-only)
 COPY data/ data/
 
 # Non-root user for security
@@ -50,4 +49,4 @@ EXPOSE 3001
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
   CMD wget -qO- http://localhost:3001/api/health || exit 1
 
-CMD ["npx", "ts-node", "apps/api/server/server.ts"]
+CMD ["node", "dist/apps/api/server/server.js"]

@@ -5,6 +5,9 @@ import fs from "node:fs";
 import path from "node:path";
 import type { EconomicIndicators, PolicyContext } from "../context/policy-context";
 import { DataSourceError, type DomainError, ValidationError } from "../shared/errors/domain-error";
+import { createEvent } from "../shared/events/domain-event";
+import { eventBus } from "../shared/events/event-bus";
+import { PolicyEventTypes } from "../shared/events/policy-events";
 import { createLogger } from "../shared/logger/logger";
 import type { Result } from "../shared/result/result";
 import { fail, ok } from "../shared/result/result";
@@ -108,9 +111,7 @@ export class FileEconomicContextRepository implements EconomicContextRepository 
       return fail(new ValidationError("sources", "Must be an array"));
     }
 
-    logger.info("Economic context loaded successfully", { country: obj.country, year: obj.year });
-
-    return ok({
+    const context: PolicyContext = {
       country: obj.country,
       year: obj.year as number,
       indicators: {
@@ -120,6 +121,20 @@ export class FileEconomicContextRepository implements EconomicContextRepository 
         gdp_growth: ind.gdp_growth as number,
       },
       sources: obj.sources.map(String),
-    });
+    };
+
+    logger.info("Economic context loaded successfully", { country: context.country, year: context.year });
+
+    // Publish EconomicContextLoaded event for audit trail
+    eventBus.publish(
+      createEvent(PolicyEventTypes.EconomicContextLoaded, "repository.file", {
+        country: context.country,
+        year: context.year,
+        source: "file",
+        indicatorCount: requiredKeys.length,
+      }),
+    );
+
+    return ok(context);
   }
 }

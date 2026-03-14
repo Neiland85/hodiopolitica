@@ -36,12 +36,12 @@ describe("evaluatePolicy", () => {
   it("should return generic metric for unsupported domains", () => {
     const policy: PolicyDecision = {
       id: "test-2",
-      title: "Healthcare Test",
+      title: "Transport Test",
       description: "Test",
       date: new Date(),
       actors: ["test"],
       objectives: ["test"],
-      domain: "healthcare",
+      domain: "transport" as PolicyDecision["domain"],
     };
 
     const metrics = evaluatePolicy(policy, baseContext);
