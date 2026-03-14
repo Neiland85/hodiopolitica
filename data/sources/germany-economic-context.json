@@ -1,0 +1,15 @@
+{
+  "country": "Germany",
+  "year": 2023,
+  "indicators": {
+    "inflation": 5.9,
+    "unemployment": 3.0,
+    "housing_price_index": 165.8,
+    "gdp_growth": -0.3
+  },
+  "sources": [
+    "Destatis",
+    "Eurostat",
+    "Deutsche Bundesbank"
+  ]
+}

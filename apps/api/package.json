@@ -1,0 +1,12 @@
+{
+  "name": "@hodiopolitica/api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "REST API server for policy evaluation engine",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0"
+  }
+}

@@ -1,27 +1,51 @@
-import { PolicyDecision } from '../policy/policy-decision'
-import { PolicyContext } from '../context/policy-context'
-import { PolicyMetric } from '../metrics/policy-metric'
+import type { PolicyDecision } from '../policy/policy-decision'
+import type { PolicyContext } from '../context/policy-context'
+import type { PolicyMetric } from '../metrics/policy-metric'
+import { evaluateHousingPolicy } from '../models/housing-policy-model'
+import { evaluateEducationPolicy } from '../models/education-policy-model'
 
-// import { evaluateHousingPolicy } from '../models/housing-policy-model'
+/**
+ * Central policy evaluation engine.
+ *
+ * Routes a PolicyDecision to the appropriate domain-specific model
+ * based on the `domain` field, and returns computed metrics.
+ *
+ * Design: Strategy pattern — each domain has its own evaluator function.
+ * Adding a new domain requires:
+ *   1. Creating a new model in `../models/`
+ *   2. Registering it in the `evaluators` map below
+ */
 
-export function evaluatePolicy(decision: PolicyDecision, context: PolicyContext): PolicyMetric[] {
-  const metrics: PolicyMetric[] = []
+export type PolicyEvaluator = (decision: PolicyDecision, context: PolicyContext) => PolicyMetric[]
 
-  const title = decision.title.toLowerCase()
+const evaluators: Record<string, PolicyEvaluator> = {
+  housing: evaluateHousingPolicy,
+  education: evaluateEducationPolicy,
+  // Future domains:
+  // healthcare: evaluateHealthcarePolicy,
+  // economy: evaluateEconomyPolicy,
+  // environment: evaluateEnvironmentPolicy,
+}
 
-  // if (title.includes('vivienda') || title.includes('housing')) {
-  //   metrics.push(...evaluateHousingPolicy(decision, context))
-  // }
+export function evaluatePolicy(
+  decision: PolicyDecision,
+  context: PolicyContext,
+): PolicyMetric[] {
+  const evaluator = evaluators[decision.domain]
 
-  if (metrics.length === 0) {
-    metrics.push({
+  if (evaluator) {
+    return evaluator(decision, context)
+  }
+
+  // Fallback: return a placeholder metric for unsupported domains
+  return [
+    {
       policyId: decision.id,
       metricName: 'generic_policy_analysis',
       value: 0,
       source: 'policy-engine',
       timestamp: new Date(),
-    })
-  }
-
-  return metrics
+      description: `No specialized model available for domain "${decision.domain}". Register an evaluator in policy-engine.ts.`,
+    },
+  ]
 }

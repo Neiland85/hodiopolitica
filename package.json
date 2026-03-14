@@ -3,15 +3,26 @@
   "version": "1.0.0",
   "private": true,
   "type": "commonjs",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "scripts": {
     "engine": "ts-node run-policy-analysis.ts",
-    "api": "ts-node apps/api/server/server.ts",
-    "web": "cd apps/web && npm run dev",
-    "dev": "ts-node apps/api/server/server.ts"
+    "dev:api": "ts-node apps/api/server/server.ts",
+    "dev:web": "cd apps/web && npm run dev",
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:web\"",
+    "build": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ext .ts,.tsx",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
     "ts-node": "^10.9.2",
     "typescript": "^5.9.0",
-    "@types/node": "^20.0.0"
+    "@types/node": "^20.0.0",
+    "concurrently": "^9.1.0",
+    "vitest": "^3.0.0"
   }
 }
