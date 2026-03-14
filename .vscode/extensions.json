@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "eamodio.gitlens",
+    "mhutchie.git-graph",
+    "yzhang.markdown-all-in-one",
+    "bierner.markdown-mermaid",
+    "humao.rest-client",
+    "Gruntfuggly.todo-tree"
+  ]
+}
