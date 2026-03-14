@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: BUSL-1.1
+// Copyright (c) 2026 Clarity Structures Digital S.L.
+
 import type { NextFunction, Request, Response } from "express";
 import { getConfig } from "../../../packages/engine/config/config";
 

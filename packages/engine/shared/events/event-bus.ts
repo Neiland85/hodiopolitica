@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: BUSL-1.1
+// Copyright (c) 2026 Clarity Structures Digital S.L.
+
 import { createLogger } from "../logger/logger";
 import type { DomainEvent } from "./domain-event";
 

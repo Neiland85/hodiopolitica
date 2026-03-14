@@ -35,3 +35,13 @@ jobs:
         run: |
           npx vitest run --coverage --reporter=json --outputFile=coverage.json 2>/dev/null || true
           echo "✅ Coverage report generated"
+
+      - name: Security audit (npm)
+        run: npm audit --audit-level=moderate || true
+
+      - name: License compliance check
+        run: |
+          npx license-checker --onlyAllow 'MIT;Apache-2.0;ISC;BSD-2-Clause;BSD-3-Clause;0BSD;BUSL-1.1;CC0-1.0;Unlicense;Python-2.0;BlueOak-1.0.0' \
+            --excludePrivatePackages \
+            --production
+          echo "✅ License compliance check passed"

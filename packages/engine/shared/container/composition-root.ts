@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: BUSL-1.1
+// Copyright (c) 2026 Clarity Structures Digital S.L.
+
 import { CompareCountriesUseCase } from "../../application/compare-countries.usecase";
 import { EvaluatePolicyUseCase } from "../../application/evaluate-policy.usecase";
 import { ListCountriesUseCase } from "../../application/list-countries.usecase";

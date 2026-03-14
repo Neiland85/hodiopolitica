@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: BUSL-1.1
+// Copyright (c) 2026 Clarity Structures Digital S.L.
+
 /**
  * Result of evaluating a policy against economic indicators.
  * Each metric represents one measurable impact dimension.

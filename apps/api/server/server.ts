@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: BUSL-1.1
+// Copyright (c) 2026 Clarity Structures Digital S.L.
+
 import type { Request, Response } from "express";
 import express from "express";
 import type {
@@ -17,9 +20,12 @@ import type { PolicyDecision, PolicyDomain } from "../../../packages/engine/poli
 import type { EconomicContextRepository } from "../../../packages/engine/repositories/economic-context-repository";
 import { bootstrapContainer, DI } from "../../../packages/engine/shared/container/composition-root";
 import { createLogger } from "../../../packages/engine/shared/logger/logger";
+import { auditLogger } from "../middleware/audit-logger";
 import { corsMiddleware } from "../middleware/cors";
 import { errorHandler } from "../middleware/error-handler";
+import { createRateLimiter } from "../middleware/rate-limit";
 import { requestLogger } from "../middleware/request-logger";
+import { securityHeaders } from "../middleware/security-headers";
 import { validateCompareCountries, validateEvaluatePolicy } from "../middleware/validate";
 
 const logger = createLogger("api.server");
@@ -34,9 +40,18 @@ const contextRepo = container.resolve<EconomicContextRepository>(DI.ContextRepo)
 
 // ─── Express App ────────────────────────────────────────────
 const app = express();
+
+if (config.trustProxy) {
+  app.set("trust proxy", 1);
+}
+
+// ─── Security Middleware ──────────────────────────────────
+app.use(securityHeaders());
+app.use(createRateLimiter());
 app.use(corsMiddleware);
-app.use(express.json());
+app.use(express.json({ limit: config.bodyMaxSize }));
 app.use(requestLogger);
+app.use(auditLogger);
 
 const startTime = Date.now();
 

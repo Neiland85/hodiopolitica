@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: BUSL-1.1
+// Copyright (c) 2026 Clarity Structures Digital S.L.
+
 /**
  * Centralized configuration module.
  *
@@ -16,6 +19,14 @@ export interface AppConfig {
   dataDir: string;
   /** Allowed CORS origins */
   corsOrigins: string[];
+  /** Rate limit: max requests per window */
+  rateLimitMax: number;
+  /** Rate limit: window duration in ms */
+  rateLimitWindowMs: number;
+  /** Maximum JSON body size (e.g. '10kb') */
+  bodyMaxSize: string;
+  /** Trust proxy header (for rate limiting behind reverse proxy) */
+  trustProxy: boolean;
 }
 
 let cachedConfig: AppConfig | null = null;
@@ -33,6 +44,10 @@ export function getConfig(): AppConfig {
     corsOrigins: (process.env.CORS_ORIGINS || "http://localhost:3000,http://localhost:3001")
       .split(",")
       .map((s) => s.trim()),
+    rateLimitMax: parseInt(process.env.RATE_LIMIT_MAX || "100", 10),
+    rateLimitWindowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS || "900000", 10),
+    bodyMaxSize: process.env.BODY_MAX_SIZE || "10kb",
+    trustProxy: process.env.TRUST_PROXY === "true",
   };
 
   return cachedConfig;

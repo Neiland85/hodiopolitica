@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: BUSL-1.1
+// Copyright (c) 2026 Clarity Structures Digital S.L.
+
 import type { EconomicContextRepository } from "../repositories/economic-context-repository";
 import type { DomainError } from "../shared/errors/domain-error";
 import type { Result } from "../shared/result/result";
