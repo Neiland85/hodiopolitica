@@ -110,6 +110,29 @@ export interface ErrorResponse {
   timestamp: string;
 }
 
+// ─── Error Codes (single source of truth) ──────────────────
+
+export const ApiErrorCodes = {
+  /** Rate limit exceeded (429) */
+  RATE_LIMIT_EXCEEDED: "RATE_LIMIT_EXCEEDED",
+  /** Missing required policy field */
+  MISSING_POLICY: "MISSING_POLICY",
+  /** Invalid policy domain */
+  INVALID_DOMAIN: "INVALID_DOMAIN",
+  /** Invalid policy payload */
+  INVALID_POLICY: "INVALID_POLICY",
+  /** Countries list validation failure */
+  INVALID_COUNTRIES: "INVALID_COUNTRIES",
+  /** Too many countries in comparison */
+  TOO_MANY_COUNTRIES: "TOO_MANY_COUNTRIES",
+  /** Data source not found or unavailable */
+  DATA_SOURCE_ERROR: "DATA_SOURCE_ERROR",
+  /** Internal server error */
+  INTERNAL_ERROR: "INTERNAL_ERROR",
+} as const;
+
+export type ApiErrorCode = (typeof ApiErrorCodes)[keyof typeof ApiErrorCodes];
+
 export interface CountriesResponse {
   countries: string[];
 }

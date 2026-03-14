@@ -20,6 +20,7 @@ import type { PolicyDecision, PolicyDomain } from "../../../packages/engine/poli
 import type { EconomicContextRepository } from "../../../packages/engine/repositories/economic-context-repository";
 import { bootstrapContainer, DI } from "../../../packages/engine/shared/container/composition-root";
 import { createLogger } from "../../../packages/engine/shared/logger/logger";
+import { getSecurityConfig } from "../config/security-config";
 import { auditLogger } from "../middleware/audit-logger";
 import { corsMiddleware } from "../middleware/cors";
 import { errorHandler } from "../middleware/error-handler";
@@ -30,6 +31,7 @@ import { validateCompareCountries, validateEvaluatePolicy } from "../middleware/
 
 const logger = createLogger("api.server");
 const config = getConfig();
+const securityConfig = getSecurityConfig();
 
 // ─── Composition Root ───────────────────────────────────────
 const container = bootstrapContainer();
@@ -41,7 +43,7 @@ const contextRepo = container.resolve<EconomicContextRepository>(DI.ContextRepo)
 // ─── Express App ────────────────────────────────────────────
 const app = express();
 
-if (config.trustProxy) {
+if (securityConfig.trustProxy) {
   app.set("trust proxy", 1);
 }
 
@@ -49,7 +51,7 @@ if (config.trustProxy) {
 app.use(securityHeaders());
 app.use(createRateLimiter());
 app.use(corsMiddleware);
-app.use(express.json({ limit: config.bodyMaxSize }));
+app.use(express.json({ limit: securityConfig.bodyMaxSize }));
 app.use(requestLogger);
 app.use(auditLogger);
 
