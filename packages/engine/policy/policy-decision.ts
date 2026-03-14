@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: BUSL-1.1
+// Copyright (c) 2026 Clarity Structures Digital S.L.
+
 /**
  * Represents a formal policy decision made by government actors.
  * This is the core entity that the engine evaluates.

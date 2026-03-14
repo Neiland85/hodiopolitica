@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: BUSL-1.1
+// Copyright (c) 2026 Clarity Structures Digital S.L.
+
 import fs from "node:fs";
 import path from "node:path";
 import type { EconomicIndicators, PolicyContext } from "../context/policy-context";

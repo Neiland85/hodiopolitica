@@ -2,9 +2,12 @@
   "name": "@hodiopolitica/api",
   "version": "1.0.0",
   "private": true,
+  "license": "BUSL-1.1",
   "description": "REST API server for policy evaluation engine",
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.0"

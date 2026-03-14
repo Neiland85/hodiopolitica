@@ -3,8 +3,11 @@ info:
   title: HodioPolitica API
   version: 1.0.0
   description: Motor de evaluación de políticas públicas contra indicadores económicos
+  license:
+    name: BUSL-1.1
+    url: https://mariadb.com/bsl11/
   contact:
-    name: HodioPolitica
+    name: Clarity Structures Digital S.L.
     url: https://github.com/Neiland85/hodiopolitica
 
 servers:
