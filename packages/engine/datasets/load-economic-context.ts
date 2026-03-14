@@ -10,7 +10,5 @@ export function loadEconomicContext() {
 
   const raw = fs.readFileSync(datasetPath, "utf-8")
 
-  const data = JSON.parse(raw)
-
-  return data
+  return JSON.parse(raw)
 }

@@ -7,11 +7,17 @@
     "engine": "ts-node run-policy-analysis.ts",
     "api": "ts-node apps/api/server/server.ts",
     "web": "cd apps/web && npm run dev",
-    "dev": "ts-node apps/api/server/server.ts"
+    "dev": "concurrently \"npm run api\" \"npm run web\"",
+    "dev:api": "ts-node apps/api/server/server.ts",
+    "dev:web": "cd apps/web && npm run dev"
   },
   "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^20.0.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.0",
-    "@types/node": "^20.0.0"
+    "typescript": "^5.9.0"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
   }
 }

@@ -5,20 +5,8 @@
     "rootDir": ".",
     "strict": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
-  },
-  "include": ["packages/**/*.ts"],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "**/*.test.ts",
-    "**/*.d.ts",
-    "**/*.js",
-    "**/*.json",
-    "**/*.md",
-    "**/*.map",
-    "**/*.tsx",
-    "**/*.jsx",
-    "**/*.spec.ts",
-  ]
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true
+  }
 }
