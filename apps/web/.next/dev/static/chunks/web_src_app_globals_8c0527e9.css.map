@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///Users/estudio/Projects/GITHUB-PROJECTS-2026/GOVERNANZA_ORGANIZATIVA/Modular%20Monolith/hodiopolitica/web/src/app/globals.css"],"sourcesContent":["@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\n:root {\n  color-scheme: dark;\n}\n\nhtml {\n  background: #000000;\n}\n\nbody {\n  min-height: 100vh;\n  background:\n    radial-gradient(circle at top, rgba(63, 63, 70, 0.18), transparent 35%),\n    linear-gradient(to bottom, #050505, #000000);\n  color: #fafafa;\n}\n"],"names":[],"mappings":"AAAA;;AACA;;AACA;;AAEA;;;;;;AAIA;;;;AAIA"}}]
+}
