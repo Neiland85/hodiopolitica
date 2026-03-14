@@ -1,0 +1,64 @@
+{
+  "version": "1.0",
+  "description": "Pre-defined scenario templates for what-if analysis",
+  "templates": [
+    {
+      "id": "status-quo",
+      "name": "Status Quo",
+      "description": "Baseline scenario with current economic conditions and no modifications.",
+      "assumptions": {}
+    },
+    {
+      "id": "optimistic",
+      "name": "Optimistic",
+      "description": "Favorable economic conditions: lower inflation, lower unemployment, stronger GDP growth.",
+      "assumptions": {
+        "indicatorOverrides": {
+          "inflation": 1.5,
+          "unemployment": 8.0,
+          "gdp_growth": 3.5
+        },
+        "sentimentShift": 15
+      }
+    },
+    {
+      "id": "pessimistic",
+      "name": "Pessimistic",
+      "description": "Adverse economic conditions: higher inflation, higher unemployment, stagnant GDP.",
+      "assumptions": {
+        "indicatorOverrides": {
+          "inflation": 6.5,
+          "unemployment": 16.0,
+          "gdp_growth": 0.2
+        },
+        "sentimentShift": -20
+      }
+    },
+    {
+      "id": "housing-crisis",
+      "name": "Housing Crisis",
+      "description": "Scenario with rapidly rising housing prices and high inflation.",
+      "assumptions": {
+        "indicatorOverrides": {
+          "inflation": 5.0,
+          "housing_price_index": 180,
+          "gdp_growth": 1.0
+        },
+        "sentimentShift": -10
+      }
+    },
+    {
+      "id": "economic-recovery",
+      "name": "Economic Recovery",
+      "description": "Post-crisis recovery with improving employment and moderate growth.",
+      "assumptions": {
+        "indicatorOverrides": {
+          "unemployment": 9.0,
+          "gdp_growth": 4.0,
+          "inflation": 2.0
+        },
+        "sentimentShift": 10
+      }
+    }
+  ]
+}

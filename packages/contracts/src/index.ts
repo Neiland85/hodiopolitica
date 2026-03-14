@@ -110,6 +110,119 @@ export interface ErrorResponse {
   timestamp: string;
 }
 
+// ─── Actor Contracts ───────────────────────────────────────
+
+export interface ActorDTO {
+  id: string;
+  name: string;
+  type: string;
+  country: string;
+}
+
+export interface ActorInfluenceDTO {
+  actorId: string;
+  actorType: string;
+  influenceScore: number;
+  influenceChannel: string;
+  stance: string;
+  description: string;
+}
+
+export interface ActorAnalysisRequest {
+  policy: {
+    id: string;
+    title: string;
+    description: string;
+    domain: string;
+    actors: string[];
+    objectives: string[];
+  };
+  country: string;
+}
+
+export interface ActorAnalysisResponse {
+  influences: ActorInfluenceDTO[];
+  alignmentScore: number;
+  supportBalance: {
+    support: number;
+    oppose: number;
+    neutral: number;
+  };
+  dominantChannel: string;
+  analyzedAt: string;
+}
+
+// ─── Media Contracts ───────────────────────────────────────
+
+export interface MediaAnalysisRequest {
+  policy: {
+    id: string;
+    title: string;
+    description: string;
+    domain: string;
+    actors: string[];
+    objectives: string[];
+  };
+  country: string;
+}
+
+export interface MediaAnalysisResponse {
+  policy: { id: string; title: string; domain: string };
+  coverage: {
+    country: string;
+    period: { start: string; end: string };
+    sources: string[];
+  };
+  metrics: PolicyMetricDTO[];
+  analyzedAt: string;
+}
+
+// ─── Pipeline Contracts ────────────────────────────────────
+
+export interface FullEvaluationRequest {
+  policy: {
+    id: string;
+    title: string;
+    description: string;
+    domain: string;
+    actors: string[];
+    objectives: string[];
+  };
+  country: string;
+  /** Optional list of stages to execute (default: all) */
+  stages?: Array<"domain" | "actors" | "media" | "pqi">;
+}
+
+export interface PQIComponentDTO {
+  name: string;
+  weight: number;
+  rawScore: number;
+  weightedScore: number;
+  description: string;
+}
+
+export interface PQIDTO {
+  score: number;
+  grade: string;
+  components: PQIComponentDTO[];
+  summary: string;
+}
+
+export interface StageOutputDTO {
+  stageName: string;
+  metrics: PolicyMetricDTO[];
+  durationMs: number;
+}
+
+export interface FullEvaluationResponse {
+  policy: { id: string; title: string; domain: string };
+  country: string;
+  stageResults: StageOutputDTO[];
+  pqi?: PQIDTO;
+  durationMs: number;
+  evaluatedAt: string;
+}
+
 // ─── Error Codes (single source of truth) ──────────────────
 
 export const ApiErrorCodes = {
@@ -125,6 +238,10 @@ export const ApiErrorCodes = {
   INVALID_COUNTRIES: "INVALID_COUNTRIES",
   /** Too many countries in comparison */
   TOO_MANY_COUNTRIES: "TOO_MANY_COUNTRIES",
+  /** Invalid country parameter */
+  INVALID_COUNTRY: "INVALID_COUNTRY",
+  /** Invalid stages parameter */
+  INVALID_STAGES: "INVALID_STAGES",
   /** Data source not found or unavailable */
   DATA_SOURCE_ERROR: "DATA_SOURCE_ERROR",
   /** Internal server error */
@@ -135,4 +252,68 @@ export type ApiErrorCode = (typeof ApiErrorCodes)[keyof typeof ApiErrorCodes];
 
 export interface CountriesResponse {
   countries: string[];
+}
+
+// ─── Scenario Contracts ──────────────────────────────────────
+
+export interface ScenarioAssumptionsDTO {
+  indicatorOverrides?: Partial<{
+    inflation: number;
+    unemployment: number;
+    housing_price_index: number;
+    gdp_growth: number;
+  }>;
+  actorOverrides?: Array<{
+    actorId: string;
+    stance: "support" | "oppose" | "neutral";
+  }>;
+  sentimentShift?: number;
+}
+
+export interface ScenarioDTO {
+  id: string;
+  name: string;
+  description: string;
+  assumptions: ScenarioAssumptionsDTO;
+}
+
+export interface ScenarioRequest {
+  policy: {
+    id: string;
+    title: string;
+    description: string;
+    domain: string;
+    actors: string[];
+    objectives: string[];
+  };
+  country: string;
+  scenarios: ScenarioDTO[];
+}
+
+export interface ScenarioResultDTO {
+  scenario: ScenarioDTO;
+  pqi: PQIDTO;
+  modifiedIndicators: {
+    inflation: number;
+    unemployment: number;
+    housing_price_index: number;
+    gdp_growth: number;
+  };
+}
+
+export interface SensitivityEntryDTO {
+  scenarioId: string;
+  scenarioName: string;
+  pqiScore: number;
+  deltaFromBaseline: number;
+}
+
+export interface ScenarioResponse {
+  scenarios: ScenarioResultDTO[];
+  ranking: string[];
+  bestCase: ScenarioResultDTO;
+  worstCase: ScenarioResultDTO;
+  sensitivityAnalysis: SensitivityEntryDTO[];
+  durationMs: number;
+  evaluatedAt: string;
 }

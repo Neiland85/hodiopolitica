@@ -1,0 +1,59 @@
+{
+  "country": "France",
+  "actors": [
+    {
+      "id": "governing-party-france",
+      "name": "Gouvernement français (Renaissance)",
+      "type": "politician",
+      "attributes": {
+        "type": "politician",
+        "votingPower": 28.5,
+        "mediaPresence": 90,
+        "coalitionLeverage": 0.45
+      }
+    },
+    {
+      "id": "opposition-rn-france",
+      "name": "Opposition principale (RN)",
+      "type": "politician",
+      "attributes": {
+        "type": "politician",
+        "votingPower": 24.8,
+        "mediaPresence": 68,
+        "coalitionLeverage": 0.2
+      }
+    },
+    {
+      "id": "assemblee-nationale-france",
+      "name": "Assemblée Nationale",
+      "type": "legislative",
+      "attributes": {
+        "type": "legislative",
+        "legislativeCapacity": 0.48,
+        "amendmentPower": 0.55,
+        "vetoPower": false
+      }
+    },
+    {
+      "id": "conseil-constitutionnel-france",
+      "name": "Conseil Constitutionnel",
+      "type": "judicial",
+      "attributes": {
+        "type": "judicial",
+        "legalReviewPower": 0.9,
+        "precedentSetting": 12
+      }
+    },
+    {
+      "id": "public-opinion-france",
+      "name": "Opinion Publique Française",
+      "type": "public",
+      "attributes": {
+        "type": "public",
+        "approvalRating": 35,
+        "protestIntensity": 0.65,
+        "electoralImpact": 0.6
+      }
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "country": "Spain",
+  "references": [
+    {
+      "id": "REF-ES-001",
+      "policyId": "housing-law-2023",
+      "title": "Rent control effects in Spanish metropolitan areas: A quasi-experimental analysis",
+      "authors": ["García-López, M.A.", "Viladecans-Marsal, E."],
+      "year": 2023,
+      "journal": "Journal of Urban Economics",
+      "citationCount": 87,
+      "methodology": "observational",
+      "relevanceScore": 0.9,
+      "findings": "Rent caps reduced available rental stock by 12% while lowering rents by 5% in regulated zones",
+      "policyAlignment": "challenges"
+    },
+    {
+      "id": "REF-ES-002",
+      "policyId": "housing-law-2023",
+      "title": "Housing affordability interventions in Southern Europe: A meta-analysis",
+      "authors": ["Rodríguez-Pose, A.", "Storper, M."],
+      "year": 2024,
+      "journal": "European Economic Review",
+      "citationCount": 152,
+      "methodology": "meta_analysis",
+      "relevanceScore": 0.85,
+      "findings": "Mixed results: demand-side subsidies more effective than supply-side regulation in improving affordability",
+      "policyAlignment": "neutral"
+    },
+    {
+      "id": "REF-ES-003",
+      "policyId": "housing-law-2023",
+      "title": "Social housing expansion impact on vulnerable populations in Barcelona",
+      "authors": ["Trilla, C.", "Bosch, J."],
+      "year": 2023,
+      "journal": "Housing Studies",
+      "citationCount": 45,
+      "methodology": "case_study",
+      "relevanceScore": 0.75,
+      "findings": "Social housing protections prevented 8,000 evictions and stabilized neighborhoods",
+      "policyAlignment": "supports"
+    },
+    {
+      "id": "REF-ES-004",
+      "policyId": "education-reform-2024",
+      "title": "Dual vocational training outcomes in Spain: PISA evidence",
+      "authors": ["López-Fogués, A.", "Ferrández-Berrueco, R."],
+      "year": 2024,
+      "journal": "Comparative Education Review",
+      "citationCount": 63,
+      "methodology": "observational",
+      "relevanceScore": 0.8,
+      "findings": "FP dual programs reduce youth unemployment by 15% compared to traditional academic tracks",
+      "policyAlignment": "supports"
+    },
+    {
+      "id": "REF-ES-005",
+      "policyId": "education-reform-2024",
+      "title": "Curriculum reform impacts on STEM enrollment: European RCT evidence",
+      "authors": ["Hanushek, E.A.", "Woessmann, L."],
+      "year": 2024,
+      "journal": "Journal of the European Economic Association",
+      "citationCount": 234,
+      "methodology": "rct",
+      "relevanceScore": 0.7,
+      "findings": "Early STEM exposure increases university enrollment in technical fields by 22%",
+      "policyAlignment": "supports"
+    },
+    {
+      "id": "REF-ES-006",
+      "policyId": "healthcare-reform-2024",
+      "title": "Primary care integration of mental health services: Spanish pilot results",
+      "authors": ["Salvador-Carulla, L.", "Fernández, A."],
+      "year": 2024,
+      "journal": "The Lancet Psychiatry",
+      "citationCount": 118,
+      "methodology": "rct",
+      "relevanceScore": 0.95,
+      "findings": "Integrated mental health in primary care reduced specialist referrals by 30% and improved patient outcomes",
+      "policyAlignment": "supports"
+    },
+    {
+      "id": "REF-ES-007",
+      "policyId": "economic-plan-2024",
+      "title": "SME tax incentives and innovation output in Mediterranean economies",
+      "authors": ["Bloom, N.", "Griffith, R.", "Van Reenen, J."],
+      "year": 2023,
+      "journal": "Quarterly Journal of Economics",
+      "citationCount": 312,
+      "methodology": "rct",
+      "relevanceScore": 0.65,
+      "findings": "R&D tax credits increase patent applications by 10% but primarily benefit larger SMEs",
+      "policyAlignment": "supports"
+    },
+    {
+      "id": "REF-ES-008",
+      "policyId": "green-transition-2024",
+      "title": "Renewable energy transition costs in Southern European grid systems",
+      "authors": ["Fabra, N.", "Reguant, M."],
+      "year": 2024,
+      "journal": "Review of Economic Studies",
+      "citationCount": 89,
+      "methodology": "observational",
+      "relevanceScore": 0.8,
+      "findings": "Accelerated coal phase-out feasible with 15% increase in grid investment; net positive by 2035",
+      "policyAlignment": "supports"
+    },
+    {
+      "id": "REF-ES-009",
+      "policyId": "green-transition-2024",
+      "title": "Just transition failures: Lessons from Asturias mining communities",
+      "authors": ["Fernández, E.", "Arango, J."],
+      "year": 2023,
+      "journal": "Energy Policy",
+      "citationCount": 56,
+      "methodology": "case_study",
+      "relevanceScore": 0.7,
+      "findings": "Past transitions left 40% of mining workers without viable alternatives within 5 years",
+      "policyAlignment": "challenges"
+    }
+  ]
+}

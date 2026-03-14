@@ -1,0 +1,14 @@
+{
+  "country": "Spain",
+  "coverage": [
+    {
+      "policyId": "housing-law-2023",
+      "period": { "startDate": "2023-04-01", "endDate": "2023-06-30" },
+      "mentionsPerDay": 78,
+      "sentiment": { "positive": 0.35, "negative": 0.40, "neutral": 0.25 },
+      "audienceReach": 18.5,
+      "engagementRate": 0.12,
+      "sources": ["El País", "El Mundo", "La Vanguardia", "RTVE", "Twitter/X"]
+    }
+  ]
+}
