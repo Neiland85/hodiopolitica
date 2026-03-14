@@ -1,0 +1,24 @@
+/* [project]/web/src/app/globals.css [app-client] (css) */
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+:root {
+  --lightningcss-light: ;
+  --lightningcss-dark: initial;
+  color-scheme: dark;
+}
+
+html {
+  background: #000;
+}
+
+body {
+  color: #fafafa;
+  background: radial-gradient(circle at top, #3f3f462e, #0000 35%), linear-gradient(#050505, #000);
+  min-height: 100vh;
+}
+
+/*# sourceMappingURL=web_src_app_globals_8c0527e9.css.map*/
